@@ -18,7 +18,7 @@
 }
 
 .header__logo:hover {
-  transform: scale(120%) rotate(90deg);
+  transform: scale(1.2) rotate(90deg);
 }
 
 .header__authentication-navigation {
