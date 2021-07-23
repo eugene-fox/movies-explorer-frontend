@@ -1,5 +1,15 @@
+import './Main.css';
+
+import { Promo } from '../Promo/Promo';
+import { NavTab } from '../NavTab/NavTab';
+import { AboutProject } from '../AboutProject/AboutProject'
+
 export function Main() {
-    return (
-        <p>Тут будет фронтэнд!</p>
-    )
+  return (
+    <main className="main">
+      <Promo />
+      <NavTab />
+      <AboutProject />
+    </main>
+  )
 }
