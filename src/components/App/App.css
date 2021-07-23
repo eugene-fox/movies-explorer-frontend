@@ -1,1 +1,8 @@
 @import url("../../vendor/fonts/Inter/inter.css");
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #073042;
+}
