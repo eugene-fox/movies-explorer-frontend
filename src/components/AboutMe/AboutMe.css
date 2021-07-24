@@ -1,0 +1,87 @@
+.about-me {
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.about-me__container {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0px 70px 0;
+}
+
+.about-me__information {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.about-me__student-photo {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.about-me__text-wrapper {
+  max-width: 600px;
+}
+
+.about-me__name {
+  margin: 0 0 18px;
+  padding: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.about-me__short-description {
+  margin: 0 0 26px;
+  padding: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.about-me__paragraph {
+  margin: 0 0 20px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.about-me__student-links {
+  display: grid;
+  grid-template-columns: min-content min-content;
+  gap: 20px;
+  list-style: none;
+  margin: 99px 0 0;
+  padding: 0;
+}
+
+.about-me__student-link-item {
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  transition: opacity .2s;
+}
+
+.about-me__student-link-item:hover {
+  opacity: .7;
+  text-decoration: underline;
+}
