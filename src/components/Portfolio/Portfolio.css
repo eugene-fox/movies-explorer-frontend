@@ -29,15 +29,17 @@
 
 .portfolio__project-list-item {
   position: relative;
-  padding: 0 0 20px;
+  padding: 0 0 0px;
   margin: 0 0 20px;
   cursor: pointer;
   border-bottom: 2px solid #E8E8E8;
   transition: border-bottom .5s;
+  color: #000000;
 }
 
 .portfolio__project-list-item:last-child {
-  margin-bottom: 125px;
+  border: none;
+  margin-bottom: 95px;
 }
 
 .portfolio__project-list-item::after {
@@ -52,7 +54,12 @@
 }
 
 .portfolio__project-list-item:hover {
+  color: #A0A0A0;
   border-bottom: 2px solid #000000;
+}
+
+.portfolio__project-list-item:last-child:hover {
+  border-bottom: none;
 }
 
 .portfolio__project-list-item:hover::after {
@@ -62,6 +69,8 @@
 
 
 .portfolio__project-list-link {
+  display: block;
+  padding: 0 0 20px;
   text-decoration: none;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -69,5 +78,5 @@
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: inherit;
 }
