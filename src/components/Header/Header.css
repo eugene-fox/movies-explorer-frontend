@@ -62,3 +62,22 @@
 .header__authentication-navigation-link_color_black {
   color: #000000;
 }
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__container {
+    padding: 0 14px;
+  }
+  .header__authentication-navigation-item {
+    padding: 5px 12px;
+    margin-right: 2px;
+  }
+  .header__authentication-navigation-link {
+    font-size: 10px;
+  }
+}
