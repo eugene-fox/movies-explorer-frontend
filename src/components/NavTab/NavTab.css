@@ -49,3 +49,21 @@
   text-decoration: none;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+  .nav-tab__container {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .nav-tab__container {
+    padding: 0 14px;
+  }
+  .nav-tab__menu-item {
+    font-size: 11px;
+    line-height: 16px;
+    margin-right: 24px;
+    padding-bottom: 1px;
+  }
+}

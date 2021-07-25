@@ -29,3 +29,23 @@
   letter-spacing: -0.04em;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+  .promo__container {
+    min-height: 784px;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo__container {
+    min-height: 570px;
+    padding: 0 10px;
+    background-size: 248px;
+  }
+  .promo__header {
+    max-width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
