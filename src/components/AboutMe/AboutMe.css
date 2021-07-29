@@ -86,3 +86,39 @@
   opacity: .7;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
+  .about-me__container {
+    padding: 18px 14px 0;
+  }
+  .about-me__information {
+    flex-direction: column;
+  }
+  .about-me__student-photo {
+    width: 100%;
+    height: 352px;
+    margin-bottom: 40px;
+  }
+  .about-me__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .about-me__short-description {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 20px;
+  }
+  .about-me__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about-me__student-links {
+    margin-top: 40px;
+  }
+  .about-me__student-link-item {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

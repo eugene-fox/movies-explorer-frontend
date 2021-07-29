@@ -1,19 +1,20 @@
 import './Header.css';
 
-import headerLogoPath from '../../images/logo.svg';
+import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <img className="header__logo" src={headerLogoPath} alt="Логотип проекта Movies Explorer" />
+        <ProjectLogo />
         <nav>
           <ul className="header__authentication-navigation">
             <li className="header__authentication-navigation-item">
-              <a className="header__authentication-navigation-link" href="/#">Регистрация</a>
+              <NavLink className="header__authentication-navigation-link" to="/signup">Регистрация</NavLink>
             </li>
             <li className="header__authentication-navigation-item header__authentication-navigation-item_accent">
-              <a className="header__authentication-navigation-link header__authentication-navigation-link_color_black" href="/#">Войти</a>
+              <NavLink className="header__authentication-navigation-link header__authentication-navigation-link_color_black" to="/signin">Войти</NavLink>
             </li>
           </ul>
         </nav>

@@ -55,7 +55,6 @@
 
 .portfolio__project-list-item:hover {
   color: #A0A0A0;
-  border-bottom: 2px solid #000000;
 }
 
 .portfolio__project-list-item:last-child:hover {
@@ -66,7 +65,6 @@
   transform: rotate(45deg);
   top: 20%;
 }
-
 
 .portfolio__project-list-link {
   display: block;
@@ -79,4 +77,24 @@
   line-height: 50px;
   letter-spacing: -0.04em;
   color: inherit;
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
+  .portfolio__container {
+    padding: 0 14px 0;
+  }
+  .portfolio__header {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .portfolio__project-list-link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio__project-list-item::after {
+    width: 18px;
+    height: 18px;
+  }
 }

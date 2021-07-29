@@ -76,3 +76,27 @@
   text-decoration: none;
 }
 
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
+  .footer__container {
+    padding: 70px 10px 0;
+    grid-template-areas: "about about" "links links" "copyright copyright";
+  }
+  .footer__copyright {
+    justify-self: center;
+  }
+  .footer__menu {
+    flex-direction: column;
+  }
+  .footer__menu-item {
+    margin: 0 0 12px;
+    align-self: center;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__copyright {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

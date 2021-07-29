@@ -80,3 +80,43 @@
 .techs__list-item:hover {
   background-color: #2BE080;
 }
+
+@media screen and (max-width: 768px) {
+  /* padding: 10px 70px 0; */
+}
+
+@media screen and (max-width: 480px) {
+  .techs {
+    background: #FFFFFF;
+  }
+  .techs__container {
+    padding: 10px 18px 0;
+  }
+  .techs__description {
+    padding-top: 0;
+  }
+  .techs__header {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+  .techs__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    justify-items: end;
+    margin: 0 auto 70px;
+  }
+  .techs__list-item {
+    margin: 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .techs__list-item:nth-child(2n) {
+    justify-self: start;
+  }
+}

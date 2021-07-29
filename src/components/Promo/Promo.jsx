@@ -1,7 +1,5 @@
 import './Promo.css';
 
-
-
 export function Promo() {
   return (
     <section className="promo">
