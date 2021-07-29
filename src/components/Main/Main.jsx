@@ -1,5 +1,6 @@
 import './Main.css';
-
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 import { Promo } from '../Promo/Promo';
 import { NavTab } from '../NavTab/NavTab';
 import { AboutProject } from '../AboutProject/AboutProject';
@@ -9,6 +10,8 @@ import { Portfolio } from '../Portfolio/Portfolio';
 
 export function Main() {
   return (
+    <>
+    <Header />
     <main className="main">
       <Promo />
       <NavTab />
@@ -17,5 +20,7 @@ export function Main() {
       <AboutMe />
       <Portfolio />
     </main>
+    <Footer />
+    </>
   )
 }
