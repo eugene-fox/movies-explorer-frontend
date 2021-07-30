@@ -3,6 +3,7 @@ import { Main } from '../Main/Main';
 import { Register } from '../Register/Register';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
 import { Route, Switch } from 'react-router-dom';
+import { Login } from '../Login/Login';
 
 
 
@@ -23,7 +24,7 @@ function App() {
         <p>Cтраница с профилем пользователя</p>
       </Route>
       <Route path="/signin">
-        <p>Авторизация</p>
+        <Login />
       </Route>
       <Route path="/signup">
         <Register />

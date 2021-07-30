@@ -29,6 +29,7 @@ export const Register = () => {
               name="userName"
               id="userName"
               required
+              autocomplete="off"
             />
             <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
             <input
@@ -38,6 +39,7 @@ export const Register = () => {
               name="userEmail"
               id="userEmail"
               required
+              autocomplete="off"
             />
             <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
             <input
@@ -47,6 +49,7 @@ export const Register = () => {
               name="userPassword"
               id="userPassword"
               required
+              autocomplete="off"
             />
           </div>
           <p className="user-auth-form__error">Что-то пошло не так...</p>
