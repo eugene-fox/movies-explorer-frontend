@@ -13,8 +13,9 @@ export function Header({ isLoginIn }) {
         <div className="header__navigation-wrapper">
           {isLoginIn ? <AuthorizedUserNav /> : ''}
           <AuthNavigation isLoginIn={isLoginIn} />
-          {isLoginIn ? <BurgerMenu /> : ''}
         </div>
+        {isLoginIn ? <BurgerMenu /> : ''}
+
       </div>
     </header>
   )
