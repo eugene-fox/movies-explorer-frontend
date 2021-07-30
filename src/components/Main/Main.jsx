@@ -8,10 +8,10 @@ import { Techs } from '../Techs/Techs';
 import { AboutMe } from '../AboutMe/AboutMe';
 import { Portfolio } from '../Portfolio/Portfolio';
 
-export function Main() {
+export function Main({isLoginIn}) {
   return (
     <>
-    <Header />
+    <Header isLoginIn={isLoginIn} />
     <main className="main">
       <Promo />
       <NavTab />

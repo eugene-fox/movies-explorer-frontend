@@ -5,14 +5,15 @@ import { PageNotFound } from '../PageNotFound/PageNotFound';
 import { Route, Switch } from 'react-router-dom';
 import { Login } from '../Login/Login';
 
-
+//Временное переключение авторизации пользователя
+const isLoginIn = true;
 
 function App() {
   return (
     <div className="app">
       <Switch>
       <Route exact path="/">
-        <Main />
+        <Main isLoginIn={isLoginIn}/>
       </Route>
       <Route path="/movies">
         <p>Фильмы</p>
