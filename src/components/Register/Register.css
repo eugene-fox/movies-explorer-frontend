@@ -1,0 +1,17 @@
+.register {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register__container {
+  padding: 70px 0 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 396px;
+  /* justify-content: center; */
+  /* align-items: center; */
+}

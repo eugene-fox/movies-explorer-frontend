@@ -1,7 +1,9 @@
 import './App.css';
 import { Main } from '../Main/Main';
-import { PageNotFound } from '../PageNotFound/PageNotFound'
+import { Register } from '../Register/Register';
+import { PageNotFound } from '../PageNotFound/PageNotFound';
 import { Route, Switch } from 'react-router-dom';
+
 
 
 function App() {
@@ -24,7 +26,7 @@ function App() {
         <p>Авторизация</p>
       </Route>
       <Route path="/signup">
-        <p>Регистрация</p>
+        <Register />
       </Route>
       <Route path="*">
         <PageNotFound />
