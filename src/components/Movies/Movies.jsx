@@ -1,10 +1,10 @@
-import './SavedMovies.css';
-import { Footer } from '../Footer/Footer';
+import './Movies.css';
 import { Header } from '../Header/Header';
 import { SearchForm } from '../SearchForm/SearchForm';
+import { Footer } from '../Footer/Footer';
 
 
-export const SavedMovies = ({ isLoginIn }) => {
+export const Movies = ({ isLoginIn }) => {
   return (
     <>
       <Header isLoginIn={isLoginIn} />

@@ -11,10 +11,10 @@ export function Footer() {
             <a className="footer__menu-link" href="https://praktikum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
           </li>
           <li className="footer__menu-item">
-            <a className="footer__menu-link" href="https://github.com/eugene-fox" target="_blank" rel="noreferrer">Github</a>
+            <a className="footer__menu-link" href="https://github.com/yandex-praktikum" target="_blank" rel="noreferrer">Github</a>
           </li>
           <li className="footer__menu-item">
-            <a className="footer__menu-link" href="https://www.facebook.com/eu.lifesizemirror" target="_blank" rel="noreferrer">Facebook</a>
+            <a className="footer__menu-link" href="https://www.facebook.com/yandex.praktikum/" target="_blank" rel="noreferrer">Facebook</a>
           </li>
         </ul>
       </div>
