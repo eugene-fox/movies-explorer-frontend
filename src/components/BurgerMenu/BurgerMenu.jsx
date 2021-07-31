@@ -17,7 +17,7 @@ export const BurgerMenu = () => {
         <nav className="burger-menu__container">
           <ul className="burger-menu__links-list">
             <li>
-              <NavLink className="burger-menu__link" activeClassName="burger-menu__link_active" to="/">Главная</NavLink>
+              <NavLink className="burger-menu__link" activeClassName="burger-menu__link_active" exact to="/">Главная</NavLink>
             </li>
             <li>
               <NavLink className="burger-menu__link" activeClassName="burger-menu__link_active" to="/movies">Фильмы</NavLink>
