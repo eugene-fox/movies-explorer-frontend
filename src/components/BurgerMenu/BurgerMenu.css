@@ -45,7 +45,7 @@
     height: 3px;
     top: 22px;
   }
-  .burger-menu__icon_active{
+  .burger-menu__icon_active {
     position: fixed;
     top: 14px;
     right: 16px;
@@ -63,7 +63,6 @@
   .burger-menu__line_active {
     transform: scale(0);
   }
-
   .burger-menu__overlay {
     display: none;
     position: fixed;
@@ -141,4 +140,14 @@
   }
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+  .burger-menu__container {
+    width: 100%;
+  }
+  .burger-menu__links-list {
+    margin: 144px;
+  }
+  .burger-menu__profile-link {
+    margin-bottom: 46px;
+  }
+}
