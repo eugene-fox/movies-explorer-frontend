@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export const BurgerMenu = () => {
 
-  const[burgerMenuDisplay, setBurgerMenuDisplay] = useState(false);
+  const [burgerMenuDisplay, setBurgerMenuDisplay] = useState(false);
 
   const toggleBurgerMenuDisplay = () => {
     setBurgerMenuDisplay(!burgerMenuDisplay)
