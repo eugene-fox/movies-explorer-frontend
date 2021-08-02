@@ -57,6 +57,20 @@
   background: url('../../images/heart-on.svg') no-repeat;
 }
 
+.movies-card__delete-button {
+  display: block;
+  cursor: pointer;
+  width: 14px;
+  height: 12px;
+  background: url('../../images/heart-cross.svg') no-repeat;
+  border: none;
+  transition: transform .2s;
+}
+
+.movies-card__delete-button:hover {
+  transform: scale(1.2);
+}
+
 @media screen and (max-width: 768px) {}
 
 @media screen and (max-width: 480px) {
