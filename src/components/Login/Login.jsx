@@ -4,9 +4,9 @@ import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
 export const Login = () => {
   return (
-    <section className="register">
-      <div className="register__container">
-        <ProjectLogo />
+    <section className="login">
+      <div className="login__container">
+        <div className="login__logo-wrapper"><ProjectLogo /></div>
         <UserAuthForm
           name="user-login-form"
           headerText="Рады видеть!"

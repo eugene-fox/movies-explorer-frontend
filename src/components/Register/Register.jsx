@@ -7,7 +7,7 @@ export const Register = () => {
   return (
     <section className="register">
       <div className="register__container">
-        <ProjectLogo />
+        <div className="register__logo-wrapper"><ProjectLogo /></div>
         <UserAuthForm
           name="user-register-form"
           headerText="Добро пожаловать!"

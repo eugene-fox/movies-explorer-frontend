@@ -14,3 +14,16 @@
   width: 100%;
   max-width: 396px;
 }
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  .register__container {
+    padding: 70px 30px 0;
+  }
+  .register__logo-wrapper {
+    align-self: center;
+  }
+}
