@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Login } from '../Login/Login';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
+import { Profile } from '../Profile/Profile';
 
 //Временное переключение авторизации пользователя
 const isLoginIn = true;
@@ -24,7 +25,7 @@ function App() {
         <SavedMovies isLoginIn={isLoginIn}/>
       </Route>
       <Route path="/profile">
-        <p>Cтраница с профилем пользователя</p>
+        <Profile isLoginIn={isLoginIn}/>
       </Route>
       <Route path="/signin">
         <Login />
