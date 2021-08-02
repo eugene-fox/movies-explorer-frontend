@@ -6,7 +6,7 @@ export const AuthNavigation = ({ isLoginIn, isLandingPage }) => {
   return (
     <nav>
       {isLoginIn ?
-        (<UserProfileLink />)
+        (<div className="user-profile-link__mobile-wrapper"><UserProfileLink /></div>)
         :
         (<ul className="auth-navigation">
           <li className="auth-navigation__item">

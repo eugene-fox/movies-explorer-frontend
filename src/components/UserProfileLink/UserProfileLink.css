@@ -21,8 +21,12 @@
   }
 
 
-@media screen and (max-width: 480px) {
-  .burger-menu__profile-link {
-    /* margin-bottom: 46px; */
+  @media screen and (max-width: 768px) {
+    .user-profile-link__mobile-wrapper {
+      display: none;
+    }
   }
+
+@media screen and (max-width: 480px) {
+
 }

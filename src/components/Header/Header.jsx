@@ -4,6 +4,7 @@ import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { AuthorizedUserNav } from '../AuthorizedUserNav/AuthorizedUserNav';
 import { AuthNavigation } from '../AuthNavigation/AuthNavigation';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
+import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
 
 export function Header({ isLoginIn }) {
 
@@ -15,10 +16,8 @@ export function Header({ isLoginIn }) {
     <header className={headerClassName}>
       <div className="header__container">
         <ProjectLogo />
-        {isLoginIn ? <AuthorizedUserNav isLandingPage={isLandingPage}/> : ''}
-        <div className="header__navigation-wrapper">
-          <AuthNavigation isLoginIn={isLoginIn} isLandingPage={isLandingPage}/>
-        </div>
+        {isLoginIn ? <AuthorizedUserNav isLandingPage={isLandingPage} /> : ''}
+        <AuthNavigation isLoginIn={isLoginIn} isLandingPage={isLandingPage} />
         {isLoginIn ? <BurgerMenu isLandingPage={isLandingPage} /> : ''}
 
       </div>
