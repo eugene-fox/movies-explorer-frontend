@@ -71,6 +71,10 @@
   opacity: .7;
 }
 
+.auth-navigation__profile-link_color_black {
+  color: #000000;
+}
+
 @media screen and (max-width: 768px) {
   .auth-navigation__profile-link {
     display: none;

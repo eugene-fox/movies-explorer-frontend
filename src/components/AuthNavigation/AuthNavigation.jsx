@@ -1,11 +1,12 @@
 import './AuthNavigation.css';
 import { NavLink } from 'react-router-dom';
+import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
 
-export const AuthNavigation = ({ isLoginIn }) => {
+export const AuthNavigation = ({ isLoginIn, isLandingPage }) => {
   return (
     <nav>
       {isLoginIn ?
-        (<NavLink className="auth-navigation__profile-link" to="/profile">Аккаунт</NavLink>)
+        (<UserProfileLink />)
         :
         (<ul className="auth-navigation">
           <li className="auth-navigation__item">

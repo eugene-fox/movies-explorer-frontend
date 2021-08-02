@@ -30,6 +30,10 @@
   opacity: .7;
 }
 
+.authorized-user-nav__link_color_black {
+  color: #000000;
+}
+
 @media screen and (max-width: 768px) {
   .authorized-user-nav {
     display: none;

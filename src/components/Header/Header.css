@@ -3,6 +3,11 @@
   background-color: #073042;
 }
 
+.header_color_white {
+  background: #ffffff;
+  color: #000000;
+}
+
 .header__container {
   position: relative;
   display: flex;

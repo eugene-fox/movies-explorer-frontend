@@ -85,7 +85,7 @@
 @media screen and (max-width: 480px) {
   .footer__container {
     grid-template-columns: 1fr 1fr ;
-    grid-template-rows: min-content 1fr 1fr;
+    grid-template-rows: min-content 1fr min-content;
     padding: 22px 10px 0;
     grid-template-areas: "about about" "links links" "copyright copyright";
   }
