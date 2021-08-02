@@ -16,9 +16,11 @@
   grid-area: section-header;
 }
 
-/* @media screen and (max-width: 768px) {
-  .main__section-header {}
-} */
+@media screen and (max-width: 768px) {
+  .main__section-header {
+    margin-top: 70px;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .main__section-header {

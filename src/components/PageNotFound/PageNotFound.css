@@ -11,7 +11,7 @@
   height: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .page-not-found__header-container {
@@ -46,7 +46,7 @@
   display: inline;
   border: none;
   background: none;
-  margin: 0 auto 60px;
+  margin: 184px auto 60px;
   padding: 0;
   align-self: flex-end;
   cursor: pointer;
@@ -80,13 +80,14 @@
   .page-not-found__header {
     font-size: 80px;
     line-height: 97px;
+    margin-bottom: 10px;
   }
   .page-not-found__message {
     font-size: 12px;
     line-height: 15px;
   }
   .page-not-found__goback-link {
-    margin-bottom: 30px;
+    margin:  284px auto 30px;
     font-size: 12px;
     line-height: 15px;
   }

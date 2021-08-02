@@ -18,7 +18,7 @@
 .footer__about-text {
   display: block;
   grid-area: about;
-  padding: 10px 0 20px 0;
+  padding: 15px 0 20px 0;
   border-bottom: 1px solid #E8E8E8;
   margin: 0;
   font-family: Inter;
@@ -76,17 +76,24 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+  .footer__container {
+    padding: 43px 37px 0;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .footer__container {
-    padding: 70px 10px 0;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: min-content 1fr 1fr;
+    padding: 22px 10px 0;
     grid-template-areas: "about about" "links links" "copyright copyright";
   }
   .footer__copyright {
     justify-self: center;
   }
   .footer__menu {
+    margin-top: 31px;
     flex-direction: column;
   }
   .footer__menu-item {
@@ -96,6 +103,7 @@
     line-height: 15px;
   }
   .footer__copyright {
+    margin-top: 0;
     font-size: 12px;
     line-height: 15px;
   }

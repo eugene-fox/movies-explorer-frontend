@@ -47,7 +47,7 @@
   height: 30px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 10px;
   content: "";
   background: center url('../../images/arrow.svg') no-repeat;
   transition: .2s;
@@ -79,7 +79,16 @@
   color: inherit;
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+  .portfolio__container {
+    padding: 0px 50px 0;
+  }
+  .portfolio__project-list-link {
+    font-size: 28px;
+    line-height: 50px;
+    padding: 0 0 17px;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .portfolio__container {
@@ -89,6 +98,9 @@
     font-size: 14px;
     line-height: 20px;
   }
+  .portfolio__project-list {
+    margin-top: 42px;
+  }
   .portfolio__project-list-link {
     font-size: 18px;
     line-height: 28px;
@@ -96,5 +108,7 @@
   .portfolio__project-list-item::after {
     width: 18px;
     height: 18px;
+    background-size: 10px;
+    top: 4px;
   }
 }

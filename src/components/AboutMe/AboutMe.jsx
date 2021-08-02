@@ -7,7 +7,9 @@ export function AboutMe() {
       <div className="about-me__container">
         <h2 className="main__section-header">Студент</h2>
         <article className="about-me__information">
+          <picture className="about-me__student-photo-wrapper">
           <img className="about-me__student-photo" src={studentPhotoPath} alt="Фотография студента" />
+          </picture>
           <div className="about-me__text-wrapper">
             <h3 className="about-me__name">Евгений</h3>
             <p className="about-me__short-description">Фронтенд-разработчик, 28 лет</p>

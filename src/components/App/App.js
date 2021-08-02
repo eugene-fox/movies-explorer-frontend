@@ -9,7 +9,7 @@ import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
 
 //Временное переключение авторизации пользователя
-const isLoginIn = true;
+const isLoginIn = false;
 
 function App() {
   return (
