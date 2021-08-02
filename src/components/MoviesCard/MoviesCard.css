@@ -56,3 +56,41 @@
 .movies-card__save-film-button_active {
   background: url('../../images/heart-on.svg') no-repeat;
 }
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
+  .movies-card {
+    flex-direction: column;
+    margin: 0 0 20px 0;
+  }
+  .movies-card__cover-image {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+  .movies-card__description {
+    padding: 14px 16px 14px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+    gap: 8px;
+  }
+  .movies-card__header {
+    margin: 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .movies-card__film-duration {
+    margin: 0;
+    font-size: 11px;
+    line-height: 13px;
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  .movies-card__save-film-button {
+    grid-column-start: 2;
+    justify-self: end;
+  }
+}

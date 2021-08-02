@@ -84,13 +84,16 @@
 
 @media screen and (max-width: 480px) {
   .footer__container {
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content 1fr min-content;
     padding: 22px 10px 0;
     grid-template-areas: "about about" "links links" "copyright copyright";
   }
   .footer__copyright {
     justify-self: center;
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 15px;
   }
   .footer__menu {
     margin-top: 31px;
@@ -102,8 +105,7 @@
     font-size: 12px;
     line-height: 15px;
   }
-  .footer__copyright {
-    margin-top: 0;
+  .footer__about-text {
     font-size: 12px;
     line-height: 15px;
   }
