@@ -5,12 +5,22 @@ import { Footer } from '../Footer/Footer';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
-export const Movies = ({ isLoginIn }) => {
+export const Movies = ({
+  isLoginIn,
+  filmSearchButtonHandler
+}) => {
+
+  const movies = JSON.parse(localStorage.movies);
+
   return (
     <>
       <Header isLoginIn={isLoginIn} />
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm
+        filmSearchButtonHandler={filmSearchButtonHandler}
+      />
+      <MoviesCardList
+        movies={movies}
+      />
       <Footer />
     </>
   )

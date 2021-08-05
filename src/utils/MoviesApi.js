@@ -24,7 +24,7 @@ export default class MoviesApi {
 
   //Получение всех фильмов со стороннего API
   getMovies() {
-    return fetch(this._url, {
+    return fetch(`${this._url}/beatfilm-movies`, {
         method: 'GET',
         headers: this._getHeaders()
       })

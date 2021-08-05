@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'; // импортируем BrowserRouter
 import './index.css';
-import App from './components/App/App.js';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
