@@ -3,7 +3,13 @@ import { useRouteMatch } from "react-router-dom";
 
 import './MoviesCard.css';
 
-export const MoviesCard = ({imageUrl, title, filmDuration, isSaved}) => {
+export const MoviesCard = ({
+  imageUrl,
+  title,
+  filmDuration,
+  trailerLink,
+  isSaved
+}) => {
 
   const isSavedMoviesPage = useRouteMatch({ path: '/saved-movies', exact: true });
 
@@ -19,22 +25,24 @@ export const MoviesCard = ({imageUrl, title, filmDuration, isSaved}) => {
 
   return (
     <li className="movies-card">
-      <img className="movies-card__cover-image" src={imageUrl} alt={title} />
+      <a href={trailerLink} target="_blank" rel='noreferrer'>
+        <img className="movies-card__cover-image" src={imageUrl} alt={title} />
+      </a>
       <div className="movies-card__description">
         <h2 className="movies-card__header">{title}</h2>
         <span className="movies-card__film-duration">{filmDuration}</span>
         {isSavedMoviesPage ? (<button
-            type="button"
-            aria-label="Удалить фильм"
-            className="movies-card__delete-button"
-          />) : (
-        <button
+          type="button"
+          aria-label="Удалить фильм"
+          className="movies-card__delete-button"
+        />) : (
+          <button
             type="button"
             aria-label="Сохранить фильм"
             className={filmLikeButtonClassName}
             onClick={filmLikeButtonClickHandler}
           />)}
       </div>
-    </li>
+    </li >
   )
 }
