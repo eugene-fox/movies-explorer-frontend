@@ -1,7 +1,7 @@
 import { Header } from '../Header/Header';
 import './Profile.css';
 
-export const Profile = ({ isLoginIn }) => {
+export const Profile = ({ isLoginIn, onLogout }) => {
   return (
     <>
       <Header isLoginIn={isLoginIn} />
@@ -22,7 +22,10 @@ export const Profile = ({ isLoginIn }) => {
             <button type="submit" className="profile__edit-button">
               Редактировать
             </button>
-            <button className="profile__logout-button">
+            <button
+              className="profile__logout-button"
+              onClick={onLogout}
+            >
               Выйти из аккаунта
             </button>
 

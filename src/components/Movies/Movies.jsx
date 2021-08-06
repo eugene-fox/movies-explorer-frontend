@@ -6,20 +6,19 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
 export const Movies = ({
-  isLoginIn,
-  filmSearchButtonHandler
+  isLoggedIn,
+  moviesSearchHandler,
+  allMovies
 }) => {
-
-  const movies = JSON.parse(localStorage.movies);
 
   return (
     <>
-      <Header isLoginIn={isLoginIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <SearchForm
-        filmSearchButtonHandler={filmSearchButtonHandler}
+        filmSearchButtonHandler={moviesSearchHandler}
       />
       <MoviesCardList
-        movies={movies}
+        movies={allMovies}
       />
       <Footer />
     </>

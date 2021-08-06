@@ -8,8 +8,10 @@ export default class MainApi {
   }
 
   //Установка заголовков запроса
-  _getHeaders() {
+  _getHeaders(jwt) {
+    jwt = typeof jwt=='undefined' ? '' : jwt;
     return {
+      authorization: `Bearer ${jwt}`,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
@@ -18,6 +20,10 @@ export default class MainApi {
   //Проверка ответа сервера
   _checkResponse(res) {
     return res.ok ? res.json() : Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
+  }
+
+  getToken(){
+    return localStorage.getItem('jwt');
   }
 
   //Регистрация нового пользователя в сервисе
@@ -52,6 +58,13 @@ export default class MainApi {
         })
       })
       .then(this._checkResponse);
+  }
+  getUserInfo(){
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'GET',
+      headers: this._getHeaders(localStorage.getItem('jwt')),
+    })
+    .then(this._checkResponse);
   }
 }
 

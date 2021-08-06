@@ -3,6 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { Main } from '../Main/Main';
 import { Register } from '../Register/Register';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
@@ -21,17 +22,25 @@ function App() {
   // Хук состояния, залогинен ли пользователь
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Тестовый хук для всех фильмов
+  const [allMovies, setAllMovies] = useState([]);
+
   const history = useHistory();
 
   //Проверка наличия токена в локальном хранилище
   const tokenCheck = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (!jwt) {
+    const jwt = mainApi.getToken();
+    console.log(jwt)
+    if (jwt) {
+      mainApi.getUserInfo()
+        .then(res => {
+          setIsLoggedIn(true);
+        })
+        .catch(err => { console.log(err.message) });
+    } else {
       console.log('JWT токен отсуствует');
       return;
     }
-    setIsLoggedIn(true);
-    history.push('/');
   }
 
   //Проверка наличия токена в локальном хранилище при монтировании элемента
@@ -64,15 +73,13 @@ function App() {
     localStorage.removeItem('jwt');
     setCurrentUser({});
     setIsLoggedIn(false);
-    history.push('/signin')
+    history.push('/')
   }
-
-
 
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
 
-  const filmSearchButtonHandler = (evt) => {
+  const moviesSearchHandler = (evt) => {
     evt.preventDefault();
     moviesApi.getMovies()
       .then((movies) => localStorage.setItem('movies', JSON.stringify(movies)));
@@ -85,20 +92,35 @@ function App() {
           <Route exact path="/">
             <Main isLoginIn={isLoggedIn} />
           </Route>
-          <Route path="/movies">
+          <ProtectedRoute
+            path="/movies"
+            isLoggedIn={isLoggedIn}
+          >
             <Movies
-              isLoginIn={isLoggedIn}
-              filmSearchButtonHandler={filmSearchButtonHandler}
+              isLoggedIn={isLoggedIn}
+              moviesSearchHandler={moviesSearchHandler}
+              allMovies={allMovies}
             />
-          </Route>
-          <Route path="/saved-movies">
+          </ProtectedRoute>
+          <ProtectedRoute
+            path="/saved-movies"
+            isLoggedIn={isLoggedIn}
+          >
             <SavedMovies isLoginIn={isLoggedIn} />
-          </Route>
-          <Route path="/profile">
-            <Profile isLoginIn={isLoggedIn} />
-          </Route>
+          </ProtectedRoute>
+          <ProtectedRoute
+            path="/profile"
+            isLoggedIn={isLoggedIn}
+          >
+            <Profile
+              isLoginIn={isLoggedIn}
+              onLogout={onLogout}
+            />
+          </ProtectedRoute>
           <Route path="/signin">
-            <Login />
+            <Login
+              onLogin={onLogin}
+            />
           </Route>
           <Route path="/signup">
             <Register />

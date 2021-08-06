@@ -14,7 +14,7 @@ export const MoviesCardList = ({
       <div className="movies-card-list__container">
         <Preloader />
         <ul className="movies-card-list__movies-card-wrapper">
-          {movies.map((movie) => (
+          {/* {movies.map((movie) => (
             <MoviesCard
               key={movie.id}
               movie={movie}
@@ -24,7 +24,7 @@ export const MoviesCardList = ({
               trailerLink={movie.trailerLink}
               isSaved={false}
             />
-          ))}
+          ))} */}
         </ul>
 
         <button className="movies-card-list__more-movies-button">Ещё</button>

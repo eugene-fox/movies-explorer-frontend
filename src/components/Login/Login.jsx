@@ -1,13 +1,41 @@
+import { useState } from 'react';
+
 import './Login.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
+
+// Данные для аутентификации
+  const [loginData, setloginData] = useState({
+    email: '',
+    password: ''
+  });
+
+  // Обработчик изменения значений в инпутах
+  const handleInputChange = (evt) => {
+    const { name, value } = evt.target;
+    setloginData({
+      ...loginData,
+      [name]: value
+    });
+  }
+
+  // Обработчик сабмита формы
+  const handleLoginSubmit = (evt) => {
+    evt.preventDefault();
+    if (!loginData.email || !loginData.password) {
+      return;
+    }
+    onLogin(loginData);
+  }
+
   return (
     <section className="login">
       <div className="login__container">
         <div className="login__logo-wrapper"><ProjectLogo /></div>
         <UserAuthForm
+          onSubmit={handleLoginSubmit}
           name="user-login-form"
           headerText="Рады видеть!"
           submitButtonText="Войти"
@@ -21,20 +49,24 @@ export const Login = () => {
               className="user-auth-form__input"
               placeholder="E-mail"
               type="text"
-              name="userEmail"
+              name="email"
               id="userEmail"
               required
-              autocomplete="off"
+              autoComplete="off"
+              value={loginData.email}
+              onChange={handleInputChange}
             />
             <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
             <input
               className="user-auth-form__input"
               placeholder="Пароль"
               type="password"
-              name="userPassword"
+              name="password"
               id="userPassword"
               required
-              autocomplete="off"
+              autoComplete="off"
+              value={loginData.password}
+              onChange={handleInputChange}
             />
           </div>
         </UserAuthForm>
