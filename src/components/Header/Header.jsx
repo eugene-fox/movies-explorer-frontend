@@ -17,7 +17,7 @@ export function Header({ isLoggedIn }) {
       <div className="header__container">
         <ProjectLogo />
         {isLoggedIn ? <AuthorizedUserNav isLandingPage={isLandingPage} /> : ''}
-        <AuthNavigation isLoginIn={isLoggedIn} isLandingPage={isLandingPage} />
+        <AuthNavigation isLoggedIn={isLoggedIn} isLandingPage={isLandingPage} />
         {isLoggedIn ? <BurgerMenu isLandingPage={isLandingPage} /> : ''}
 
       </div>

@@ -7,9 +7,9 @@ export default class MainApi {
     this._url = url;
   }
 
-  //Установка заголовков запроса
+  //  Установка заголовков запроса
   _getHeaders(jwt) {
-    jwt = typeof jwt=='undefined' ? '' : jwt;
+    jwt = typeof jwt == 'undefined' ? '' : jwt;
     return {
       authorization: `Bearer ${jwt}`,
       'Accept': 'application/json',
@@ -17,16 +17,16 @@ export default class MainApi {
     }
   }
 
-  //Проверка ответа сервера
+  //  Проверка ответа сервера
   _checkResponse(res) {
     return res.ok ? res.json() : Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('jwt');
   }
 
-  //Регистрация нового пользователя в сервисе
+  //  Регистрация нового пользователя в сервисе
   register({
     email,
     password,
@@ -44,7 +44,7 @@ export default class MainApi {
       .then(this._checkResponse);
   }
 
-  //Авторизация нового пользователя в сервисе
+  //  Авторизация нового пользователя в сервисе
   authorize({
     email,
     password
@@ -59,12 +59,24 @@ export default class MainApi {
       })
       .then(this._checkResponse);
   }
-  getUserInfo(){
+
+  //  Получение данных о пользователе
+  getUserInfo() {
     return fetch(`${BASE_URL}/users/me`, {
-      method: 'GET',
-      headers: this._getHeaders(localStorage.getItem('jwt')),
-    })
-    .then(this._checkResponse);
+        method: 'GET',
+        headers: this._getHeaders(localStorage.getItem('jwt')),
+      })
+      .then(this._checkResponse);
+  }
+
+  //  Обновление профиля пользователя
+  updateUserProfile(userData) {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'PATCH',
+        headers: this._getHeaders(localStorage.getItem('jwt')),
+        body: JSON.stringify(userData)
+      })
+      .then(this._checkResponse);
   }
 }
 

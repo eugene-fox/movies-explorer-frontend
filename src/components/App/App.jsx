@@ -25,21 +25,27 @@ function App() {
   // Тестовый хук для всех фильмов
   const [allMovies, setAllMovies] = useState([]);
 
+  //Стейт данных текущего пользователя
+  const [currentUser, setCurrentUser] = useState({});
+
+
+
   const history = useHistory();
 
   //Проверка наличия токена в локальном хранилище
   const tokenCheck = () => {
     const jwt = mainApi.getToken();
-    console.log(jwt)
-    if (jwt) {
+    if (!jwt) {
+      return;
+    } else {
+      // console.log(`Токен есть: ${jwt}`);
       mainApi.getUserInfo()
         .then(res => {
-          setIsLoggedIn(true);
+          if (res) {
+            setIsLoggedIn(true);
+          };
         })
         .catch(err => { console.log(err.message) });
-    } else {
-      console.log('JWT токен отсуствует');
-      return;
     }
   }
 
@@ -47,6 +53,16 @@ function App() {
   useEffect(() => {
     tokenCheck();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mainApi.getUserInfo()
+        .then(data => {
+          setCurrentUser(data);
+        })
+        .catch(err => { console.log(err.message) });
+    }
+  }, [history, isLoggedIn])
 
   //Обработчик регистрации нового пользователя
   const onRegister = (data) => {
@@ -63,9 +79,25 @@ function App() {
     return mainApi.authorize(data)
       .then((res) => {
         setIsLoggedIn(true);
+        mainApi.getUserInfo()
+        .then(res => {
+          setCurrentUser(res);
+        })
+        .catch(err => { console.log(err.message) });
+        console.log(currentUser);
+
         localStorage.setItem('jwt', res.token);
         history.push('/movies');
       })
+  }
+
+  //Обработчик изменения данных авторизованного пользователя
+  const handleUpdateUser = (userData) => {
+    return mainApi.updateUserProfile(userData)
+    .then((res) => {
+      setCurrentUser(res)
+    })
+    .catch(err => { console.log(err.message) });
   }
 
   //Обработчик выхода пользователя
@@ -75,9 +107,6 @@ function App() {
     setIsLoggedIn(false);
     history.push('/')
   }
-
-  //Стейт данных текущего пользователя
-  const [currentUser, setCurrentUser] = useState({});
 
   const moviesSearchHandler = (evt) => {
     evt.preventDefault();
@@ -90,7 +119,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route exact path="/">
-            <Main isLoginIn={isLoggedIn} />
+            <Main isLoggedIn={isLoggedIn} />
           </Route>
           <ProtectedRoute
             path="/movies"
@@ -106,14 +135,16 @@ function App() {
             path="/saved-movies"
             isLoggedIn={isLoggedIn}
           >
-            <SavedMovies isLoginIn={isLoggedIn} />
+            <SavedMovies isLoggedIn={isLoggedIn} />
           </ProtectedRoute>
           <ProtectedRoute
             path="/profile"
             isLoggedIn={isLoggedIn}
           >
             <Profile
-              isLoginIn={isLoggedIn}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+              onUpdateUser={handleUpdateUser}
               onLogout={onLogout}
             />
           </ProtectedRoute>
@@ -123,7 +154,9 @@ function App() {
             />
           </Route>
           <Route path="/signup">
-            <Register />
+            <Register
+              onRegister={onRegister}
+            />
           </Route>
           <Route path="*">
             <PageNotFound />
