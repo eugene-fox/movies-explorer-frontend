@@ -1,5 +1,6 @@
 import {
-  BASE_URL
+  BASE_URL,
+  BEATFILM_MOVIES_URL
 } from './constants';
 
 export default class MainApi {
@@ -78,6 +79,45 @@ export default class MainApi {
       })
       .then(this._checkResponse);
   }
+
+  //  Получение сохраненных пользователем фильмов
+  getSavedMovies() {
+    return fetch(`${this._url}/movies`, {
+        headers: this._getHeaders(localStorage.getItem('jwt'))
+      })
+      .then(this._checkResponse);
+  }
+
+  //  Добавление фильма в сохраненные
+  addMovieToSaved(movie) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: this._getHeaders(localStorage.getItem('jwt')),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `${BEATFILM_MOVIES_URL}${movie.image.url}`,
+        thumbnail: `${BEATFILM_MOVIES_URL}${movie.image.url}`,
+        trailer: movie.trailerLink,
+        movieId: movie.id.toString(),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN
+      })
+    }).then(this._getResponse)
+  }
+
+  //  Удаление фильма из сохраненных
+  removeMovieFromSaved(movieId) {
+    return fetch(`${this._url}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: this._getHeaders(localStorage.getItem('jwt')),
+    }).then(this._checkResponse)
+  }
 }
+
+
 
 export const mainApi = new MainApi(BASE_URL);
