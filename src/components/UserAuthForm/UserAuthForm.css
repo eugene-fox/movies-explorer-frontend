@@ -23,6 +23,8 @@
 }
 
 .user-auth-form__label {
+  display: grid;
+  position: relative;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -55,6 +57,8 @@
 }
 
 .user-auth-form__error {
+  position: absolute;
+  bottom: 0;
   padding: 0;
   margin: 0 0 0;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
@@ -89,6 +93,12 @@
 .user-auth-form__button:focus {
   opacity: .9;
   outline: 2px solid #2BE080;
+}
+
+.user-auth-form__button_disabled {
+  cursor: default;
+  background: #F8F8F8;
+  color: #C2C2C2;
 }
 
 .user-auth-form__additional-text {

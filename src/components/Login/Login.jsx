@@ -1,33 +1,22 @@
-import { useState } from 'react';
-
 import './Login.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+
 export const Login = ({ onLogin }) => {
 
-// Данные для аутентификации
-  const [loginData, setloginData] = useState({
-    email: '',
-    password: ''
-  });
+  const {values, errors, isValid, handleChange} = useFormWithValidation();
 
-  // Обработчик изменения значений в инпутах
-  const handleInputChange = (evt) => {
-    const { name, value } = evt.target;
-    setloginData({
-      ...loginData,
-      [name]: value
-    });
-  }
+  const {email, password} = values;
 
   // Обработчик сабмита формы
   const handleLoginSubmit = (evt) => {
     evt.preventDefault();
-    if (!loginData.email || !loginData.password) {
+    if (!email || !password) {
       return;
     }
-    onLogin(loginData);
+    onLogin({email, password});
   }
 
   return (
@@ -36,6 +25,7 @@ export const Login = ({ onLogin }) => {
         <div className="login__logo-wrapper"><ProjectLogo /></div>
         <UserAuthForm
           onSubmit={handleLoginSubmit}
+          isValid={isValid}
           name="user-login-form"
           headerText="Рады видеть!"
           submitButtonText="Войти"
@@ -44,30 +34,39 @@ export const Login = ({ onLogin }) => {
           linkUrl="/signup"
         >
           <div className="user-auth-form__input-container">
-            <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="E-mail"
-              type="text"
-              name="email"
-              id="userEmail"
-              required
-              autoComplete="off"
-              value={loginData.email}
-              onChange={handleInputChange}
-            />
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Пароль"
-              type="password"
-              name="password"
-              id="userPassword"
-              required
-              autoComplete="off"
-              value={loginData.password}
-              onChange={handleInputChange}
-            />
+            <label className="user-auth-form__label" htmlFor="userEmail">E-mail
+              <input
+                type="email"
+                className="user-auth-form__input"
+                placeholder="E-mail"
+                name="email"
+                id="userEmail"
+                required
+                autoComplete="off"
+                value={values.email}
+                onChange={handleChange}
+              />
+              <span className="user-auth-form__error">
+                {errors.email}
+              </span>
+            </label>
+            <label className="user-auth-form__label" htmlFor="userPassword">Пароль
+              <input
+                className="user-auth-form__input"
+                placeholder="Пароль"
+                type="password"
+                name="password"
+                id="userPassword"
+                required
+                minLength="6"
+                autoComplete="off"
+                value={values.password}
+                onChange={handleChange}
+              />
+              <span className="user-auth-form__error">
+                {errors.password}
+              </span>
+            </label>
           </div>
         </UserAuthForm>
       </div>
