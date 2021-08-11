@@ -4,7 +4,7 @@ import {
 } from 'react';
 
 //хук управления формой и валидации формы
-export function useFormWithValidation() {
+export default function useFormWithValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
