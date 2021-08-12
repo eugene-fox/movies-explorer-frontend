@@ -1,27 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 
 import './MoviesCard.css';
 
 export const MoviesCard = ({
+  movie,
   imageUrl,
   title,
   filmDuration,
   trailerLink,
-  isSaved
+  savedMovies,
+  addMovieToSaved,
+  removeMovieFromSaved
 }) => {
 
   const isSavedMoviesPage = useRouteMatch({ path: '/saved-movies', exact: true });
 
-  const [filmLikeStatus, setFilmLikeStatus] = useState(isSaved);
+  const [filmLikeStatus, setFilmLikeStatus] = useState(false);
 
-  const filmLikeButtonClickHandler = () => {
-    setFilmLikeStatus(!filmLikeStatus);
+  useEffect(() => {
+    if (savedMovies.some(film => movie.movieId === film.movieId)) {
+      setFilmLikeStatus(true);
+    }
+  }, [])
+
+  const isLiked = savedMovies.some(film => movie.movieId === film.movieId)
+
+  // const filmLikeButtonClassName = (
+  //   `movies-card__save-film-button ${isLiked ? 'movies-card__save-film-button_active' : 'movies-card__save-film-button_disable'}`
+  // );
+
+  //  Обработчик клика по кнопке лайка
+  const addMovieToSavedHandler = () => {
+    console.log(movie, savedMovies)
+
+    const isLiked = savedMovies.some(film => movie.movieId === film.movieId)
+    console.log(isLiked);
+
+    if (!isLiked) {
+      addMovieToSaved(movie);
+      setFilmLikeStatus(true);
+    } else {
+      removeMovieFromSaved(movie._id);
+      setFilmLikeStatus(false);
+    }
   }
-
-  const filmLikeButtonClassName = (
-    `movies-card__save-film-button ${filmLikeStatus ? 'movies-card__save-film-button_active' : 'movies-card__save-film-button_disable'}`
-  );
 
   return (
     <li className="movies-card">
@@ -35,13 +58,15 @@ export const MoviesCard = ({
           type="button"
           aria-label="Удалить фильм"
           className="movies-card__delete-button"
+          onClick={addMovieToSavedHandler}
         />) : (
           <button
             type="button"
             aria-label="Сохранить фильм"
-            className={filmLikeButtonClassName}
-            onClick={filmLikeButtonClickHandler}
-          />)}
+            className={`movies-card__save-film-button ${filmLikeStatus ? 'movies-card__save-film-button_active' : 'movies-card__save-film-button_disable'}`}
+            onClick={addMovieToSavedHandler}
+          />
+        )}
       </div>
     </li >
   )

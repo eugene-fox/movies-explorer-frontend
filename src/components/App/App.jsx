@@ -12,7 +12,7 @@ import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
 
-import { moviesApi } from '../../utils/MoviesApi';
+
 import { mainApi } from '../../utils/MainApi';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -22,13 +22,8 @@ function App() {
   // Хук состояния, залогинен ли пользователь
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Тестовый хук для всех фильмов
-  const [allMovies, setAllMovies] = useState([]);
-
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
-
-
 
   const history = useHistory();
 
@@ -54,6 +49,7 @@ function App() {
     tokenCheck();
   }, []);
 
+  //  Обновляем стейт пользователя
   useEffect(() => {
     if (isLoggedIn) {
       mainApi.getUserInfo()
@@ -80,10 +76,10 @@ function App() {
       .then((res) => {
         setIsLoggedIn(true);
         mainApi.getUserInfo()
-        .then(res => {
-          setCurrentUser(res);
-        })
-        .catch(err => { console.log(err.message) });
+          .then(res => {
+            setCurrentUser(res);
+          })
+          .catch(err => { console.log(err.message) });
         console.log(currentUser);
 
         localStorage.setItem('jwt', res.token);
@@ -94,24 +90,19 @@ function App() {
   //Обработчик изменения данных авторизованного пользователя
   const handleUpdateUser = (userData) => {
     return mainApi.updateUserProfile(userData)
-    .then((res) => {
-      setCurrentUser(res)
-    })
-    .catch(err => { console.log(err.message) });
+      .then((res) => {
+        setCurrentUser(res)
+      })
+      .catch(err => { console.log(err.message) });
   }
 
   //Обработчик выхода пользователя
   const onLogout = () => {
-    localStorage.removeItem('jwt');
+    // localStorage.removeItem('jwt');
+    localStorage.clear();
     setCurrentUser({});
     setIsLoggedIn(false);
     history.push('/')
-  }
-
-  const moviesSearchHandler = (evt) => {
-    evt.preventDefault();
-    moviesApi.getMovies()
-      .then((movies) => localStorage.setItem('movies', JSON.stringify(movies)));
   }
 
   return (
@@ -127,15 +118,15 @@ function App() {
           >
             <Movies
               isLoggedIn={isLoggedIn}
-              moviesSearchHandler={moviesSearchHandler}
-              allMovies={allMovies}
             />
           </ProtectedRoute>
           <ProtectedRoute
             path="/saved-movies"
             isLoggedIn={isLoggedIn}
           >
-            <SavedMovies isLoggedIn={isLoggedIn} />
+            <Movies
+              isLoggedIn={isLoggedIn}
+            />
           </ProtectedRoute>
           <ProtectedRoute
             path="/profile"
