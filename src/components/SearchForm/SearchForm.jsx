@@ -1,4 +1,5 @@
 import './SearchForm.css';
+import { ShortMoviesCheckbox } from '../ShortMoviesCheckbox/ShortMoviesCheckbox';
 
 export const SearchForm = () => {
   return (
@@ -9,11 +10,7 @@ export const SearchForm = () => {
             <input className="search-form__text-field" type="text" placeholder="Фильм" />
             <button className="search-form__search-button" type="submit">Поиск</button>
           </div>
-          <label className="search-form__checkbox-wrapper">
-            <input className="search-form__checkbox" type="checkbox" name="shortMovies" id="" />
-            <span className="search-form__checkbox-visible"></span>
-            Короткометражки
-          </label>
+          <ShortMoviesCheckbox />
         </form>
       </div>
     </section>
