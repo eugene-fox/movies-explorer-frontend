@@ -26,7 +26,7 @@ export const Register = () => {
                 type="text"
                 name="userName"
                 id="userName"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
               <span className="user-auth-form__error">
@@ -41,7 +41,7 @@ export const Register = () => {
                 type="text"
                 name="userEmail"
                 id="userEmail"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
               <span className="user-auth-form__error">
@@ -56,7 +56,7 @@ export const Register = () => {
                 type="password"
                 name="userPassword"
                 id="userPassword"
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
               <span className="user-auth-form__error">

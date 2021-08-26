@@ -25,7 +25,7 @@ export const Login = () => {
                 name="userEmail"
                 id="userEmail"
                 required
-                autocomplete="off"
+                autoComplete="off"
               />
               <span className="user-auth-form__error">
                 Текст ошибки
@@ -39,7 +39,7 @@ export const Login = () => {
                 name="userPassword"
                 id="userPassword"
                 required
-                autocomplete="off"
+                autoComplete="off"
               />
               <span className="user-auth-form__error">
                 Текст ошибки

@@ -4,7 +4,7 @@ import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { AuthorizedUserNav } from '../AuthorizedUserNav/AuthorizedUserNav';
 import { AuthNavigation } from '../AuthNavigation/AuthNavigation';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
-import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
+// import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
 
 export function Header({ isLoginIn }) {
 
