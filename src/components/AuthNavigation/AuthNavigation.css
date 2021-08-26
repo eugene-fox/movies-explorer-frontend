@@ -83,10 +83,10 @@
 
 @media screen and (max-width: 480px) {
   .auth-navigation__item {
-    padding: 5px 12px;
     margin-right: 2px;
   }
   .auth-navigation__link {
+    padding: 5px 12px;
     font-size: 10px;
   }
 }
