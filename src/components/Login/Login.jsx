@@ -16,26 +16,35 @@ export const Login = () => {
           linkUrl="/signup"
         >
           <div className="user-auth-form__input-container">
-            <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="E-mail"
-              type="text"
-              name="userEmail"
-              id="userEmail"
-              required
-              autocomplete="off"
-            />
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Пароль"
-              type="password"
-              name="userPassword"
-              id="userPassword"
-              required
-              autocomplete="off"
-            />
+            <label className="user-auth-form__label" htmlFor="userEmail">
+              E-mail
+              <input
+                className="user-auth-form__input"
+                placeholder="E-mail"
+                type="text"
+                name="userEmail"
+                id="userEmail"
+                required
+                autocomplete="off"
+              />
+              <span className="user-auth-form__error">
+                Текст ошибки
+              </span>
+            </label>
+            <label className="user-auth-form__label" htmlFor="userPassword">Пароль
+              <input
+                className="user-auth-form__input"
+                placeholder="Пароль"
+                type="password"
+                name="userPassword"
+                id="userPassword"
+                required
+                autocomplete="off"
+              />
+              <span className="user-auth-form__error">
+                Текст ошибки
+              </span>
+            </label>
           </div>
         </UserAuthForm>
       </div>

@@ -17,42 +17,53 @@ export const Register = () => {
           linkUrl="/signin"
         >
           <div className="user-auth-form__input-container">
-            <label
-              className="user-auth-form__label"
-              htmlFor="userName">
+            <label className="user-auth-form__label" htmlFor="userName">
               Имя
+
+              <input
+                className="user-auth-form__input"
+                placeholder="Имя"
+                type="text"
+                name="userName"
+                id="userName"
+                autocomplete="off"
+                required
+              />
+              <span className="user-auth-form__error">
+                Что-то пошло не так...
+              </span>
             </label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Имя"
-              type="text"
-              name="userName"
-              id="userName"
-              autocomplete="off"
-              required
-            />
-            <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="E-mail"
-              type="text"
-              name="userEmail"
-              id="userEmail"
-              autocomplete="off"
-              required
-            />
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Пароль"
-              type="password"
-              name="userPassword"
-              id="userPassword"
-              autocomplete="off"
-              required
-            />
+            <label className="user-auth-form__label" htmlFor="userEmail">
+              E-mail
+              <input
+                className="user-auth-form__input"
+                placeholder="E-mail"
+                type="text"
+                name="userEmail"
+                id="userEmail"
+                autocomplete="off"
+                required
+              />
+              <span className="user-auth-form__error">
+                Что-то пошло не так...
+              </span>
+            </label>
+            <label className="user-auth-form__label" htmlFor="userPassword">
+              Пароль
+              <input
+                className="user-auth-form__input"
+                placeholder="Пароль"
+                type="password"
+                name="userPassword"
+                id="userPassword"
+                autocomplete="off"
+                required
+              />
+              <span className="user-auth-form__error">
+                Что-то пошло не так...
+              </span>
+            </label>
           </div>
-          <p className="user-auth-form__error">Что-то пошло не так...</p>
         </UserAuthForm>
       </div>
     </section>
