@@ -1,4 +1,7 @@
 import './App.css';
+
+import { useState } from 'react';
+
 import { Main } from '../Main/Main';
 import { Register } from '../Register/Register';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
@@ -9,43 +12,55 @@ import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
+import { CurrentUserContext } from '../../contexts/currentUser/CurrentUserContext';
+
 //Временное переключение авторизации пользователя
 const isLoggedIn = false;
 
 function App() {
+
+  //Стейт данных текущего пользователя
+  const [currentUser, setCurrentUser] = useState({});
+
   return (
     <div className="app">
-      <Switch>
 
-      <Route exact path="/">
-        <Main isLoggedIn={isLoggedIn}/>
-      </Route>
+      <CurrentUserContext.Provider value={currentUser}>
 
-      <ProtectedRoute path="/movies" isLoggedIn={isLoggedIn}>
-        <Movies isLoggedIn={isLoggedIn} />
-      </ProtectedRoute>
+        <Switch>
 
-      <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn} >
-        <SavedMovies isLoggedIn={isLoggedIn} />
-      </ProtectedRoute>
+          <Route exact path="/">
+            <Main isLoggedIn={isLoggedIn} />
+          </Route>
 
-      <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn} >
-        <Profile isLoggedIn={isLoggedIn} />
-      </ProtectedRoute>
+          <ProtectedRoute path="/movies" isLoggedIn={isLoggedIn}>
+            <Movies isLoggedIn={isLoggedIn} />
+          </ProtectedRoute>
 
-      <Route path="/signin">
-        <Login />
-      </Route>
+          <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn} >
+            <SavedMovies isLoggedIn={isLoggedIn} />
+          </ProtectedRoute>
 
-      <Route path="/signup">
-        <Register />
-      </Route>
+          <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn} >
+            <Profile isLoggedIn={isLoggedIn} />
+          </ProtectedRoute>
 
-      <Route path="*">
-        <PageNotFound />
-      </Route>
+          <Route path="/signin">
+            <Login />
+          </Route>
 
-      </Switch>
+          <Route path="/signup">
+            <Register />
+          </Route>
+
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+
+        </Switch>
+
+      </CurrentUserContext.Provider>
+
     </div>
   );
 }
