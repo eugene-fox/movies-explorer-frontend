@@ -2,8 +2,14 @@ import './Register.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo.jsx';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 export const Register = () => {
+
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
+
+  const { userName, userEmail, userPassword } = values;
+
   return (
     <section className="register">
       <div className="register__container">
@@ -15,11 +21,12 @@ export const Register = () => {
           additionalText="Уже зарегистрированы?"
           linkText="Войти"
           linkUrl="/signin"
+          isValid={isValid}
+          commonMistakeText={'Общая ошибка'}
         >
           <div className="user-auth-form__input-container">
             <label className="user-auth-form__label" htmlFor="userName">
               Имя
-
               <input
                 className="user-auth-form__input"
                 placeholder="Имя"
@@ -28,9 +35,11 @@ export const Register = () => {
                 id="userName"
                 autoComplete="off"
                 required
+                onChange={handleChange}
+                value={userName}
               />
               <span className="user-auth-form__error">
-                Что-то пошло не так...
+                {errors.userName}
               </span>
             </label>
             <label className="user-auth-form__label" htmlFor="userEmail">
@@ -38,14 +47,16 @@ export const Register = () => {
               <input
                 className="user-auth-form__input"
                 placeholder="E-mail"
-                type="text"
+                type="email"
                 name="userEmail"
                 id="userEmail"
                 autoComplete="off"
                 required
+                onChange={handleChange}
+                value={userEmail}
               />
               <span className="user-auth-form__error">
-                Что-то пошло не так...
+                {errors.userEmail}
               </span>
             </label>
             <label className="user-auth-form__label" htmlFor="userPassword">
@@ -58,9 +69,12 @@ export const Register = () => {
                 id="userPassword"
                 autoComplete="off"
                 required
+                onChange={handleChange}
+                value={userPassword}
+                minLength="8"
               />
               <span className="user-auth-form__error">
-                Что-то пошло не так...
+                {errors.userPassword}
               </span>
             </label>
           </div>

@@ -61,7 +61,7 @@
   position: absolute;
   padding: 0;
   margin: 0 0 0;
-  bottom: 6px;
+  bottom: 0px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -70,9 +70,18 @@
   color: #FF3055;
 }
 
+.user-auth-form__common-mistake-text {
+  margin: 100px 0 0 0;
+  padding: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-align: center;
+  color: #FF004C;
+}
+
 .user-auth-form__button {
   cursor: pointer;
-  margin: 134px 0 16px;
+  margin: 34px 0 16px;
   padding: 13px 0 15px;
   background: #3456F3;
   border-radius: 3px;
@@ -94,6 +103,16 @@
 .user-auth-form__button:focus {
   opacity: .9;
   outline: 2px solid #2BE080;
+}
+
+.user-auth-form__button_disabled {
+  color: #C2C2C2;
+  background: #F8F8F8;
+}
+
+.user-auth-form__button_disabled:hover {
+  opacity: 1;
+  cursor: auto;
 }
 
 .user-auth-form__additional-text {

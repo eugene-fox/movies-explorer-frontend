@@ -1,14 +1,41 @@
 import './UserAuthForm.css'
 import { NavLink } from 'react-router-dom';
 
-export const UserAuthForm = ({ name, headerText, children, submitButtonText, additionalText, linkText, linkUrl }) => {
+export const UserAuthForm = ({
+  name,
+  headerText,
+  children,
+  submitButtonText,
+  additionalText,
+  linkText,
+  linkUrl,
+  isValid,
+  commonMistakeText,
+}) => {
   return (
-    <form className="user-auth-form" name={name}>
+    <form className="user-auth-form"
+      name={name}
+      noValidate
+    >
       <h2 className="user-auth-form__header">{headerText}</h2>
       {children}
-      <button className="user-auth-form__button" type="submit">{submitButtonText}</button>
-      <p className="user-auth-form__additional-text">{additionalText}&nbsp;
-        <NavLink className="user-auth-form__additional-link" to={linkUrl}>{linkText}</NavLink></p>
+
+      <p className="user-auth-form__common-mistake-text">
+        {commonMistakeText}
+      </p>
+      <button
+        className={`user-auth-form__button ${!isValid ? 'user-auth-form__button_disabled' : ''}`}
+        type="submit"
+        disabled={!isValid ? true : false}
+      >
+        {submitButtonText}
+      </button>
+      <p className="user-auth-form__additional-text">
+        {additionalText}
+        <NavLink className="user-auth-form__additional-link" to={linkUrl}>
+          &nbsp;{linkText}
+        </NavLink>
+      </p>
     </form>
   )
 }

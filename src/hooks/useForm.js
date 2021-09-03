@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 //  Хук управления формой
-export function useForm() {
+export default function useForm() {
   const [values, setValues] = useState({});
 
   const handleChange = (event) => {

@@ -2,7 +2,14 @@ import './Login.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+
 export const Login = () => {
+
+  const { values, errors, isValid, handleChange } = useFormWithValidation();
+
+  const { userEmail, userPassword } = values;
+
   return (
     <section className="login">
       <div className="login__container">
@@ -14,6 +21,8 @@ export const Login = () => {
           additionalText="Ещё не зарегистрированы?"
           linkText="Регистрация"
           linkUrl="/signup"
+          isValid={isValid}
+          commonMistakeText={'Общая ошибка'}
         >
           <div className="user-auth-form__input-container">
             <label className="user-auth-form__label" htmlFor="userEmail">
@@ -21,14 +30,16 @@ export const Login = () => {
               <input
                 className="user-auth-form__input"
                 placeholder="E-mail"
-                type="text"
+                type="email"
                 name="userEmail"
                 id="userEmail"
                 required
                 autoComplete="off"
+                onChange={handleChange}
+                value={userEmail}
               />
               <span className="user-auth-form__error">
-                Текст ошибки
+                {errors.userEmail}
               </span>
             </label>
             <label className="user-auth-form__label" htmlFor="userPassword">Пароль
@@ -40,9 +51,12 @@ export const Login = () => {
                 id="userPassword"
                 required
                 autoComplete="off"
+                onChange={handleChange}
+                value={userPassword}
+                minLength="8"
               />
               <span className="user-auth-form__error">
-                Текст ошибки
+                {errors.userPassword}
               </span>
             </label>
           </div>
