@@ -4,15 +4,16 @@ import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const Login = () => {
+export const Login = ({onLogin, commonMistakeText}) => {
 
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
-  const { userEmail, userPassword } = values;
+  const { email, password } = values;
 
   // Обработчик сабмита формы логина
   const handleLoginFormSubmit = (evt) => {
     evt.preventDefault();
+    onLogin({email, password});
     resetForm();
   }
 
@@ -29,41 +30,41 @@ export const Login = () => {
           linkUrl="/signup"
           isValid={isValid}
           onSubmit={handleLoginFormSubmit}
-          commonMistakeText={'Общая ошибка'}
+          commonMistakeText={commonMistakeText}
         >
           <div className="user-auth-form__input-container">
-            <label className="user-auth-form__label" htmlFor="userEmail">
+            <label className="user-auth-form__label" htmlFor="email">
               E-mail
               <input
                 className="user-auth-form__input"
                 placeholder="E-mail"
                 type="email"
-                name="userEmail"
-                id="userEmail"
+                name="email"
+                id="email"
                 required
                 autoComplete="off"
                 onChange={handleChange}
-                value={userEmail || ''}
+                value={email || ''}
               />
               <span className="user-auth-form__error">
-                {errors.userEmail}
+                {errors.email}
               </span>
             </label>
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль
+            <label className="user-auth-form__label" htmlFor="password">Пароль
               <input
                 className="user-auth-form__input"
                 placeholder="Пароль"
                 type="password"
-                name="userPassword"
-                id="userPassword"
+                name="password"
+                id="password"
                 required
                 autoComplete="off"
                 onChange={handleChange}
-                value={userPassword || ''}
+                value={password || ''}
                 minLength="8"
               />
               <span className="user-auth-form__error">
-                {errors.userPassword}
+                {errors.password}
               </span>
             </label>
           </div>

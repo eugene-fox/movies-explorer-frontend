@@ -28,7 +28,6 @@ class MainApi {
         status: res.status,
         statusText: res.statusText,
       });
-    // Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
   }
 
 
