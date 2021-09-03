@@ -10,12 +10,14 @@ export const UserAuthForm = ({
   linkText,
   linkUrl,
   isValid,
+  onSubmit,
   commonMistakeText,
 }) => {
   return (
     <form className="user-auth-form"
       name={name}
       noValidate
+      onSubmit={onSubmit}
     >
       <h2 className="user-auth-form__header">{headerText}</h2>
       {children}

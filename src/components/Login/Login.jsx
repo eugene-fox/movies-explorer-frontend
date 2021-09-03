@@ -6,9 +6,15 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 export const Login = () => {
 
-  const { values, errors, isValid, handleChange } = useFormWithValidation();
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
   const { userEmail, userPassword } = values;
+
+  // Обработчик сабмита формы логина
+  const handleLoginFormSubmit = (evt) => {
+    evt.preventDefault();
+    resetForm();
+  }
 
   return (
     <section className="login">
@@ -22,6 +28,7 @@ export const Login = () => {
           linkText="Регистрация"
           linkUrl="/signup"
           isValid={isValid}
+          onSubmit={handleLoginFormSubmit}
           commonMistakeText={'Общая ошибка'}
         >
           <div className="user-auth-form__input-container">
@@ -36,7 +43,7 @@ export const Login = () => {
                 required
                 autoComplete="off"
                 onChange={handleChange}
-                value={userEmail}
+                value={userEmail || ''}
               />
               <span className="user-auth-form__error">
                 {errors.userEmail}
@@ -52,7 +59,7 @@ export const Login = () => {
                 required
                 autoComplete="off"
                 onChange={handleChange}
-                value={userPassword}
+                value={userPassword || ''}
                 minLength="8"
               />
               <span className="user-auth-form__error">

@@ -14,6 +14,8 @@ import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 import { CurrentUserContext } from '../../contexts/currentUser/CurrentUserContext';
 
+import { mainApi } from '../../utils/MainApi';
+
 //Временное переключение авторизации пользователя
 const isLoggedIn = false;
 
@@ -21,6 +23,24 @@ function App() {
 
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
+
+  const [commonMistakeText, setCommonMistakeText] = useState('');
+
+  const onRegistration = (data) => {
+    console.log(data);
+    return mainApi.registerUser(data)
+      .then((res) => {
+        setCommonMistakeText('');
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.status === 409) {
+          setCommonMistakeText('Пользователь с таким email уже существует.')
+        } else {
+          setCommonMistakeText(`${err.status} — ${err.statusText}`);
+        }
+      });
+  }
 
   return (
     <div className="app">
@@ -50,7 +70,7 @@ function App() {
           </Route>
 
           <Route path="/signup">
-            <Register />
+            <Register onRegistration={onRegistration} commonMistakeText={commonMistakeText} />
           </Route>
 
           <Route path="*">

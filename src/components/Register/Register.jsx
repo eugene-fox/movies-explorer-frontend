@@ -4,11 +4,18 @@ import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const Register = () => {
+export const Register = ({ onRegistration, commonMistakeText }) => {
 
-  const { values, errors, isValid, handleChange } = useFormWithValidation();
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
-  const { userName, userEmail, userPassword } = values;
+  const { name, email, password } = values;
+
+  // Обработчик сабмита формы регистрации
+  const handleRegisterFormSubmit = (evt) => {
+    evt.preventDefault();
+    onRegistration({name, email, password});
+    resetForm();
+  }
 
   return (
     <section className="register">
@@ -22,59 +29,60 @@ export const Register = () => {
           linkText="Войти"
           linkUrl="/signin"
           isValid={isValid}
-          commonMistakeText={'Общая ошибка'}
+          onSubmit={handleRegisterFormSubmit}
+          commonMistakeText={commonMistakeText}
         >
           <div className="user-auth-form__input-container">
-            <label className="user-auth-form__label" htmlFor="userName">
+            <label className="user-auth-form__label" htmlFor="name">
               Имя
               <input
                 className="user-auth-form__input"
                 placeholder="Имя"
                 type="text"
-                name="userName"
-                id="userName"
+                name="name"
+                id="name"
                 autoComplete="off"
                 required
                 onChange={handleChange}
-                value={userName}
+                value={name || ''}
               />
               <span className="user-auth-form__error">
-                {errors.userName}
+                {errors.name}
               </span>
             </label>
-            <label className="user-auth-form__label" htmlFor="userEmail">
+            <label className="user-auth-form__label" htmlFor="email">
               E-mail
               <input
                 className="user-auth-form__input"
                 placeholder="E-mail"
                 type="email"
-                name="userEmail"
-                id="userEmail"
+                name="email"
+                id="email"
                 autoComplete="off"
                 required
                 onChange={handleChange}
-                value={userEmail}
+                value={email || ''}
               />
               <span className="user-auth-form__error">
-                {errors.userEmail}
+                {errors.email}
               </span>
             </label>
-            <label className="user-auth-form__label" htmlFor="userPassword">
+            <label className="user-auth-form__label" htmlFor="password">
               Пароль
               <input
                 className="user-auth-form__input"
                 placeholder="Пароль"
                 type="password"
-                name="userPassword"
-                id="userPassword"
+                name="password"
+                id="password"
                 autoComplete="off"
                 required
                 onChange={handleChange}
-                value={userPassword}
+                value={password || ''}
                 minLength="8"
               />
               <span className="user-auth-form__error">
-                {errors.userPassword}
+                {errors.password}
               </span>
             </label>
           </div>

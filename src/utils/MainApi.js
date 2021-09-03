@@ -4,7 +4,7 @@ import {
 } from './constants';
 
 //  Api для взаимодействия с бэкендом
-export default class MainApi {
+class MainApi {
   constructor(url) {
     this._url = url;
   }
@@ -21,9 +21,14 @@ export default class MainApi {
 
   //  Проверка ответа сервера
   _checkResponse(res) {
+    console.log(res);
     return res.ok ?
       res.json() :
-      Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
+      Promise.reject({
+        status: res.status,
+        statusText: res.statusText,
+      });
+    // Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
   }
 
 
