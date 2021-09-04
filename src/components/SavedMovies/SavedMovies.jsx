@@ -5,10 +5,10 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
-export const SavedMovies = ({ isLoginIn }) => {
+export const SavedMovies = ({ isLoggedIn }) => {
   return (
     <>
-      <Header isLoginIn={isLoginIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <SearchForm />
       <MoviesCardList />
       <Footer />

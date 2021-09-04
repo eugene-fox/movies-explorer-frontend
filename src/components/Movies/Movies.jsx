@@ -5,10 +5,10 @@ import { Footer } from '../Footer/Footer';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
-export const Movies = ({ isLoginIn }) => {
+export const Movies = ({ isLoggedIn }) => {
   return (
     <>
-      <Header isLoginIn={isLoginIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <SearchForm />
       <MoviesCardList />
       <Footer />

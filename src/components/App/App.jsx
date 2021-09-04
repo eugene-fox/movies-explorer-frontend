@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Main } from '../Main/Main';
 import { Register } from '../Register/Register';
@@ -16,12 +16,7 @@ import { CurrentUserContext } from '../../contexts/currentUser/CurrentUserContex
 
 import { mainApi } from '../../utils/MainApi';
 
-//Временное переключение авторизации пользователя
-const isLoggedIn = false;
-
 function App() {
-
-  const history = useHistory();
 
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
@@ -30,13 +25,44 @@ function App() {
   // Стейт сообщения об ошибки при регистрации / авторизации
   const [commonMistakeText, setCommonMistakeText] = useState('');
 
+  const history = useHistory();
+
+  //Проверка наличия токена в локальном хранилище
+  const checkToken = () => {
+    const jwt = mainApi.getToken();
+    if (!jwt) {
+      return;
+    } else {
+      console.log(`Токен есть: ${jwt}`);
+      mainApi.getUserInfo()
+        .then(res => {
+          if (res) {
+            setIsLoggedIn(true);
+          };
+        })
+        .catch(err => { console.log(err.message) });
+    }
+  }
+
+    //Проверка наличия токена в локальном хранилище при монтировании элемента
+    useEffect(() => {
+      checkToken();
+    }, []);
+
   //  Отправка и обработка запроса на авторизацию существующего пользователя
   const onLogin = (data) => {
     return mainApi.authorizeUser(data)
-      .then(() => {
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('jwt', res.token);
+        mainApi.getUserInfo()
+          .then(res => {
+            setCurrentUser(res);
+          })
+          .catch(console.log);
         setIsLoggedIn(true);
         setCommonMistakeText('');
-        history.push('/');
+        history.push('/movies');
       })
       .catch(err => {
         console.log(err);

@@ -1,10 +1,10 @@
 import { Header } from '../Header/Header';
 import './Profile.css';
 
-export const Profile = ({ isLoginIn }) => {
+export const Profile = ({ isLoggedIn }) => {
   return (
     <>
-      <Header isLoginIn={isLoginIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <section className="profile">
         <div className="profile__container">
           <form className="profile__form">
