@@ -18,11 +18,11 @@ import { mainApi } from '../../utils/MainApi';
 
 function App() {
 
-  //Стейт данных текущего пользователя
+  //  Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
-  //Стейт состоянии авторизации пользователя
+  //  Стейт состоянии авторизации пользователя
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // Стейт сообщения об ошибки при регистрации / авторизации
+  //  Стейт сообщения об ошибки при регистрации / авторизации
   const [commonMistakeText, setCommonMistakeText] = useState('');
 
   const history = useHistory();
@@ -33,21 +33,22 @@ function App() {
     if (!jwt) {
       return;
     } else {
-      console.log(`Токен есть: ${jwt}`);
+      // console.log(`Токен есть: ${jwt}`);
       mainApi.getUserInfo()
         .then(res => {
           if (res) {
             setIsLoggedIn(true);
+            setCurrentUser(res);
           };
         })
         .catch(err => { console.log(err.message) });
     }
   }
 
-    //Проверка наличия токена в локальном хранилище при монтировании элемента
-    useEffect(() => {
-      checkToken();
-    }, []);
+  //Проверка наличия токена в локальном хранилище при монтировании элемента
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   //  Отправка и обработка запроса на авторизацию существующего пользователя
   const onLogin = (data) => {
@@ -92,6 +93,33 @@ function App() {
       });
   }
 
+  //Обработчик изменения данных авторизованного пользователя
+  const onUpdateUser = (userData) => {
+    return mainApi.updateUserProfile(userData)
+      .then((res) => {
+        setCurrentUser(res);
+        setCommonMistakeText('Профиль успешно обновлен!')
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.status === 409) {
+          setCommonMistakeText('Пользователь с таким email уже существует.');
+        } else {
+          setCommonMistakeText(`${err.status} — ${err.statusText}`);
+        }
+      }
+      );
+  }
+
+  //Обработчик выхода пользователя
+  const onLogout = () => {
+    // localStorage.removeItem('jwt');
+    localStorage.clear();
+    setCurrentUser({});
+    setIsLoggedIn(false);
+    history.push('/')
+  }
+
   return (
     <div className="app">
 
@@ -112,7 +140,13 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn} >
-            <Profile isLoggedIn={isLoggedIn} />
+            <Profile
+              isLoggedIn={isLoggedIn}
+              commonMistakeText={commonMistakeText}
+              setCommonMistakeText={setCommonMistakeText}
+              onUpdateUser={onUpdateUser}
+              onLogout={onLogout}
+            />
           </ProtectedRoute>
 
           <Route path="/signin">
