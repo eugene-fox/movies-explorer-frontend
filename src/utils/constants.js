@@ -3,3 +3,6 @@ export const API_URL = 'https://api.eugenefox.movies.nomoredomains.monster';
 
 // Адрес API с фильмами "https://api.nomoreparties.co/beatfilm-movies"
 export const MOVIES_API_URL = 'https://api.nomoreparties.co';
+
+//Продолжительность короткометражного фильма 40 минут
+export const SHORT_MOVIE_DURATION = 40;

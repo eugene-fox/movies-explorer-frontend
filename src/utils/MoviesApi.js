@@ -1,5 +1,5 @@
 import {
-  API_URL
+  MOVIES_API_URL
 } from './constants';
 
 export default class MoviesApi {
@@ -32,4 +32,4 @@ export default class MoviesApi {
   }
 }
 
-export const moviesApi = new MoviesApi(API_URL);
+export const moviesApi = new MoviesApi(MOVIES_API_URL);

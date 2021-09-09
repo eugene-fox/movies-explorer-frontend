@@ -11,10 +11,14 @@ import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+import { UserBlockedRoute } from '../UserBlockedRoute/UserBlockedRoute';
 
 import { CurrentUserContext } from '../../contexts/currentUser/CurrentUserContext';
 
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
+
+import { SHORT_MOVIE_DURATION } from '../../utils/constants';
 
 function App() {
 
@@ -24,6 +28,21 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //  Стейт сообщения об ошибки при регистрации / авторизации
   const [commonMistakeText, setCommonMistakeText] = useState('');
+
+  //  Стейт отображения прелоадера
+  const [preloaderVisible, setPreloaderVisible] = useState(false);
+  //  Стейт переключателя короткометражных фильмов
+  const [isShortMovies, setIsShortMovies] = useState(false);
+
+  //  Стейт всех фильмов полученных от стороннего api
+  const [allMovies, setAllMovies] = useState([]);
+  //  Стейт найденых по запросу всех фильмов полученных от стороннего api
+  const [foundAllMovies, setFoundAllMovies] = useState([]);
+  //  Стейт сохраненных пользователем фильмов
+  const [savedMovies, setSavedMovies] = useState([]);
+  //  Стейт найденых по запросу сохраненных пользователем фильмов
+  const [foundSavedMovies, setFoundSavedMovies] = useState([]);
+
 
   const history = useHistory();
 
@@ -107,17 +126,75 @@ function App() {
         } else {
           setCommonMistakeText(`${err.status} — ${err.statusText}`);
         }
-      }
-      );
+      });
   }
 
-  //Обработчик выхода пользователя
+  //  Обработчик выхода пользователя
   const onLogout = () => {
     // localStorage.removeItem('jwt');
     localStorage.clear();
     setCurrentUser({});
     setIsLoggedIn(false);
     history.push('/')
+  }
+
+  //  Фильтрация массива фильмов по ключевому слову
+  const findMoviesByKeywords = (movies, searchQuery) => {
+    if (!searchQuery) {
+      return;
+    }
+    const foundMovies = movies.filter(movie => movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()));
+    console.log(foundMovies);
+    // if (foundMovies.length === 0) {
+    //   setListMessageDisplay('movies-card-list__message movies-card-list__message_display');
+    // } else {
+    //   setListMessageDisplay('movies-card-list__message');
+    // }
+    return foundMovies;
+  }
+
+  //  Обработчик сабмита формы поиска
+  const handleMovieSearchFormSubmit = (searchQuery) => {
+    if (!localStorage.getItem('movies')) {
+      setPreloaderVisible(true);
+      moviesApi.getMovies()
+        .then((movies) => {
+          localStorage.setItem('movies', JSON.stringify(movies));
+          setAllMovies(movies);
+          setFoundAllMovies(findMoviesByKeywords(movies, searchQuery));
+        })
+        .catch(console.log)
+        .finally(() => {
+          setPreloaderVisible(false);
+        });
+    } else {
+      setAllMovies(JSON.parse(localStorage.movies));
+      setFoundAllMovies(findMoviesByKeywords(JSON.parse(localStorage.movies), searchQuery));
+    }
+  }
+
+  const getSavedMovies = () => {
+    mainApi.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch(err => { console.log(err.message) })
+      .finally(() => { console.log('Финал') });
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getSavedMovies();
+    }
+  }, [isLoggedIn]);
+
+  // Функция сортировки короткометражных фильмов
+  const filterShortMovies = (movies) => {
+    if (isShortMovies) {
+      return movies.filter(movie => movie.duration <= SHORT_MOVIE_DURATION);
+    } else {
+      return movies.filter(movie => movie.duration > SHORT_MOVIE_DURATION)
+    }
   }
 
   return (
@@ -132,11 +209,25 @@ function App() {
           </Route>
 
           <ProtectedRoute path="/movies" isLoggedIn={isLoggedIn}>
-            <Movies isLoggedIn={isLoggedIn} />
+            <Movies
+              isLoggedIn={isLoggedIn}
+              preloaderVisible={preloaderVisible}
+              onSearch={handleMovieSearchFormSubmit}
+              isShortMovies={isShortMovies}
+              setIsShortMovies={setIsShortMovies}
+              filterShortMovies={filterShortMovies}
+              movies={foundAllMovies}
+            />
           </ProtectedRoute>
 
           <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn} >
-            <SavedMovies isLoggedIn={isLoggedIn} />
+            <SavedMovies
+              isLoggedIn={isLoggedIn}
+              isShortMovies={isShortMovies}
+              setIsShortMovies={setIsShortMovies}
+              filterShortMovies={filterShortMovies}
+              movies={savedMovies}
+            />
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn} >
@@ -149,13 +240,13 @@ function App() {
             />
           </ProtectedRoute>
 
-          <Route path="/signin">
+          <UserBlockedRoute path="/signin" isLoggedIn={isLoggedIn}>
             <Login onLogin={onLogin} commonMistakeText={commonMistakeText} />
-          </Route>
+          </UserBlockedRoute>
 
-          <Route path="/signup">
+          <UserBlockedRoute path="/signup" isLoggedIn={isLoggedIn}>
             <Register onRegistration={onRegistration} commonMistakeText={commonMistakeText} />
-          </Route>
+          </UserBlockedRoute>
 
           <Route path="*">
             <PageNotFound />

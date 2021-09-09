@@ -5,12 +5,25 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
-export const SavedMovies = ({ isLoggedIn }) => {
+export const SavedMovies = ({
+  isLoggedIn,
+  onSearch,
+  isShortMovies,
+  setIsShortMovies,
+  filterShortMovies,
+  movies,
+}) => {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm
+        onSearch={onSearch}
+        isShortMovies={isShortMovies}
+        setIsShortMovies={setIsShortMovies}
+      />
+      <MoviesCardList
+        movies={isShortMovies ? filterShortMovies(movies) : movies}
+      />
       <Footer />
     </>
   )
