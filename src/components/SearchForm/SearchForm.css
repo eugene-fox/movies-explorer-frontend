@@ -65,37 +65,6 @@
   outline: 1px solid #2BE080;
 }
 
-.search-form__checkbox-wrapper {
-  display: flex;
-  position: relative;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000000;
-  padding: 0;
-}
-
-.search-form__checkbox {
-  position: absolute;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
-.search-form__checkbox-visible {
-  cursor: pointer;
-  padding: 0 14px 0 0;
-  width: 36px;
-  height: 20px;
-  background: url("data:image/svg+xml,%3Csvg width='36' height='20' viewBox='0 0 36 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='20' rx='10' fill='%23EBEBEB'/%3E%3Ccircle cx='10' cy='10' r='8' fill='%23F5F5F5'/%3E%3Ccircle cx='10' cy='10' r='7.5' stroke='white'/%3E%3C/svg%3E%0A") no-repeat;
-}
-
-.search-form__checkbox:checked+.search-form__checkbox-visible {
-  background: url("data:image/svg+xml,%3Csvg width='36' height='20' viewBox='0 0 36 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='36' height='20' rx='10' fill='%23EBEBEB'/%3E%3Ccircle cx='26' cy='10' r='8' fill='%232BE080'/%3E%3Ccircle cx='26' cy='10' r='7.5' stroke='white'/%3E%3C/svg%3E%0A") no-repeat;
-}
-
 @media screen and (max-width: 768px) {
   .search-form__container {
     padding: 70px 30px 0;
@@ -123,13 +92,5 @@
     font-size: 14px;
     line-height: 18px;
     padding: 13px 18px;
-  }
-  .search-form__checkbox-wrapper {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 11px;
-    line-height: 18px;
-    color: #000000;
   }
 }

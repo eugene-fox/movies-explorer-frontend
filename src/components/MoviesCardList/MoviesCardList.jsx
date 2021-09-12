@@ -2,64 +2,87 @@ import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { Preloader } from '../Preloader/Preloader';
 
-import picUrl1 from '../../images/pic-1.jpg';
-import picUrl2 from '../../images/pic-2.jpg';
-import picUrl3 from '../../images/pic-3.jpg';
-import picUrl4 from '../../images/pic-4.jpg';
-import picUrl5 from '../../images/pic-5.jpg';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export const MoviesCardList = () => {
+import { MOVIES_API_URL } from '../../utils/constants';
+
+import minuteToHoursConverter from '../../utils/minuteToHoursConverter';
+
+export const MoviesCardList = ({
+  movies,
+  savedMovies,
+  preloaderVisible,
+  onLikeButtonClick,
+  countOfDisplayMovie,
+  setCountOfDisplayMovie,
+  countOfDisplayMovieSetter,
+  moviesStatusMessage,
+  setMoviesStatusMessage,
+}) => {
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setMoviesStatusMessage('');
+    if (pathname !== '/saved-movies') {
+      countOfDisplayMovieSetter();
+    }
+  }, []);
 
   return (
     <section className="movies-card-list">
       <div className="movies-card-list__container">
-        <Preloader />
+        <Preloader preloaderVisible={preloaderVisible} />
+        {moviesStatusMessage.length !== 0 ?
+          <p className="movies-card-list__status-message">{moviesStatusMessage}</p> :
+          ''
+        }
+
         <ul className="movies-card-list__movies-card-wrapper">
-          <MoviesCard
-            imageUrl={picUrl1}
-            title="33 слова о дизайне"
-            filmDuration="1ч 42м"
-            isSaved={false}
-          />
-          <MoviesCard
-            imageUrl={picUrl2}
-            title="Киноальманах «100 лет дизайна»"
-            filmDuration="1ч 42м"
-            isSaved={true}
-          />
-          <MoviesCard
-            imageUrl={picUrl3}
-            title="В погоне за Бенкси"
-            filmDuration="1ч 42м"
-            isSaved={true}
-          />
-          <MoviesCard
-            imageUrl={picUrl4}
-            title="Баския: Взрыв реальности"
-            filmDuration="1ч 42м"
-            isSaved={false}
-          />
-          <MoviesCard
-            imageUrl={picUrl5}
-            title="Бег это свобода"
-            filmDuration="1ч 42м"
-            isSaved={false}
-          />
-          <MoviesCard
-            imageUrl={picUrl1}
-            title="Книготорговцы"
-            filmDuration="1ч 42м"
-            isSaved={true}
-          />
-          <MoviesCard
-            imageUrl={picUrl1}
-            title="Книготорговцы"
-            filmDuration="1ч 42м"
-            isSaved={false}
-          />
+          {pathname === '/movies' ? (
+            movies.slice(0, countOfDisplayMovie.startCards).map((movie) => (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                title={movie.nameRU}
+                filmDuration={minuteToHoursConverter(movie.duration)}
+                imageUrl={`${MOVIES_API_URL}${movie.image.url}`}
+                trailerLink={movie.trailerLink}
+                onLikeButtonClick={onLikeButtonClick}
+                savedMovies={savedMovies}
+              />
+            ))) : (
+            movies.map((movie) => (
+              <MoviesCard
+                key={movie._id}
+                movie={movie}
+                title={movie.nameRU}
+                filmDuration={minuteToHoursConverter(movie.duration)}
+                imageUrl={movie.image}
+                trailerLink={movie.trailer}
+                onLikeButtonClick={onLikeButtonClick}
+                savedMovies={movies}
+              />
+            ))
+          )
+          }
         </ul>
 
-        <button className="movies-card-list__more-movies-button">Ещё</button>
+        {
+          pathname !== '/saved-movies'
+            ? (
+              <button type="button"
+                onClick={() => {
+                  setCountOfDisplayMovie({ ...countOfDisplayMovie, startCards: countOfDisplayMovie.startCards + countOfDisplayMovie.moreCards })
+                }}
+                className={`movies-card-list__more-movies-button ${countOfDisplayMovie.startCards < movies.length ? "" : "movies-card-list__more-movies-button_hidden"}`}
+              >
+                Ещё
+              </button>
+            )
+            : ''
+        }
       </div>
     </section>
   )

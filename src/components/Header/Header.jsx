@@ -4,9 +4,9 @@ import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { AuthorizedUserNav } from '../AuthorizedUserNav/AuthorizedUserNav';
 import { AuthNavigation } from '../AuthNavigation/AuthNavigation';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
-import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
+// import { UserProfileLink } from '../UserProfileLink/UserProfileLink';
 
-export function Header({ isLoginIn }) {
+export function Header({ isLoggedIn }) {
 
   const isLandingPage = useRouteMatch({ path: '/', exact: true });
 
@@ -16,9 +16,9 @@ export function Header({ isLoginIn }) {
     <header className={headerClassName}>
       <div className="header__container">
         <ProjectLogo />
-        {isLoginIn ? <AuthorizedUserNav isLandingPage={isLandingPage} /> : ''}
-        <AuthNavigation isLoginIn={isLoginIn} isLandingPage={isLandingPage} />
-        {isLoginIn ? <BurgerMenu isLandingPage={isLandingPage} /> : ''}
+        {isLoggedIn ? <AuthorizedUserNav isLandingPage={isLandingPage} /> : ''}
+        <AuthNavigation isLoggedIn={isLoggedIn} isLandingPage={isLandingPage} />
+        {isLoggedIn ? <BurgerMenu isLandingPage={isLandingPage} /> : ''}
 
       </div>
     </header>

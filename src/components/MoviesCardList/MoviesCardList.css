@@ -12,6 +12,18 @@
   max-width: 1140px;
 }
 
+.movies-card-list__status-message {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 25px;
+  text-align: center;
+  color: #000000;
+}
+
 .movies-card-list__movies-card-wrapper {
   margin: 0;
   padding: 0;
@@ -42,16 +54,18 @@
   opacity: .7;
 }
 
+.movies-card-list__more-movies-button_hidden {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .movies-card-list__container {
     padding: 70px 30px 80px;
   }
-
   .movies-card-list__more-movies-button {
     margin-top: 40px;
     margin-bottom: 20px;
   }
-
 }
 
 @media screen and (max-width: 480px) {

@@ -7,9 +7,17 @@
   margin: 0 0 40px 0;
 }
 
-.movies-card__cover-image {
+.movies-card__cover-image-container {
   max-width: 220px;
+  max-height: 134px;
   padding: 6px 6px 6px 0;
+  overflow: hidden;
+}
+
+.movies-card__cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .movies-card__description {
@@ -102,7 +110,6 @@
     grid-column-start: 1;
     grid-row-start: 2;
   }
-
   .movies-card__save-film-button {
     grid-column-start: 2;
     justify-self: end;

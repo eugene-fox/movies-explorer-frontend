@@ -2,7 +2,25 @@ import './Login.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
-export const Login = () => {
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+
+export const Login = ({
+  onLogin,
+  commonMistakeText,
+  isSendingRequest
+}) => {
+
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+
+  const { email, password } = values;
+
+  // Обработчик сабмита формы логина
+  const handleLoginFormSubmit = (evt) => {
+    evt.preventDefault();
+    onLogin({ email, password });
+    resetForm();
+  }
+
   return (
     <section className="login">
       <div className="login__container">
@@ -14,28 +32,48 @@ export const Login = () => {
           additionalText="Ещё не зарегистрированы?"
           linkText="Регистрация"
           linkUrl="/signup"
+          isValid={isValid}
+          onSubmit={handleLoginFormSubmit}
+          commonMistakeText={commonMistakeText}
+          isSendingRequest={isSendingRequest}
         >
           <div className="user-auth-form__input-container">
-            <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="E-mail"
-              type="text"
-              name="userEmail"
-              id="userEmail"
-              required
-              autocomplete="off"
-            />
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Пароль"
-              type="password"
-              name="userPassword"
-              id="userPassword"
-              required
-              autocomplete="off"
-            />
+            <label className="user-auth-form__label" htmlFor="email">
+              E-mail
+              <input
+                className="user-auth-form__input"
+                placeholder="E-mail"
+                type="email"
+                name="email"
+                id="email"
+                required
+                autoComplete="off"
+                onChange={handleChange}
+                value={email || ''}
+                disabled={isSendingRequest ? true : false}
+              />
+              <span className="user-auth-form__error">
+                {errors.email}
+              </span>
+            </label>
+            <label className="user-auth-form__label" htmlFor="password">Пароль
+              <input
+                className="user-auth-form__input"
+                placeholder="Пароль"
+                type="password"
+                name="password"
+                id="password"
+                required
+                autoComplete="off"
+                onChange={handleChange}
+                value={password || ''}
+                minLength="8"
+                disabled={isSendingRequest ? true : false}
+              />
+              <span className="user-auth-form__error">
+                {errors.password}
+              </span>
+            </label>
           </div>
         </UserAuthForm>
       </div>

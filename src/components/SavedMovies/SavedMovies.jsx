@@ -5,12 +5,32 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 
-export const SavedMovies = ({ isLoginIn }) => {
+export const SavedMovies = ({
+  isLoggedIn,
+  onSearch,
+  isShortMovies,
+  setIsShortMovies,
+  filterShortMovies,
+  movies,
+  savedMovies,
+  onLikeButtonClick,
+  moviesStatusMessage,
+  setMoviesStatusMessage
+}) => {
   return (
     <>
-      <Header isLoginIn={isLoginIn} />
-      <SearchForm />
-      <MoviesCardList />
+      <Header isLoggedIn={isLoggedIn} />
+      <SearchForm
+        onSearch={onSearch}
+        isShortMovies={isShortMovies}
+        setIsShortMovies={setIsShortMovies}
+      />
+      <MoviesCardList
+        movies={filterShortMovies(movies)}
+        onLikeButtonClick={onLikeButtonClick}
+        moviesStatusMessage={moviesStatusMessage}
+        setMoviesStatusMessage={setMoviesStatusMessage}
+      />
       <Footer />
     </>
   )

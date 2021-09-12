@@ -6,8 +6,6 @@
 }
 
 .auth-navigation__item {
-  display: block;
-  padding: 8px 20px;
   margin: 0 10px 0 0;
   transition: opacity 0.2s;
 }
@@ -27,6 +25,8 @@
 }
 
 .auth-navigation__link {
+  display: block;
+  padding: 8px 20px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   text-decoration: none;
   font-style: normal;
@@ -83,10 +83,10 @@
 
 @media screen and (max-width: 480px) {
   .auth-navigation__item {
-    padding: 5px 12px;
     margin-right: 2px;
   }
   .auth-navigation__link {
+    padding: 5px 12px;
     font-size: 10px;
   }
 }

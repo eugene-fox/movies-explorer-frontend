@@ -2,8 +2,25 @@ import './Register.css';
 import { ProjectLogo } from '../ProjectLogo/ProjectLogo.jsx';
 import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const Register = () => {
+export const Register = ({
+  onRegistration,
+  commonMistakeText,
+  isSendingRequest
+}) => {
+
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+
+  const { name, email, password } = values;
+
+  // Обработчик сабмита формы регистрации
+  const handleRegisterFormSubmit = (evt) => {
+    evt.preventDefault();
+    onRegistration({ name, email, password });
+    resetForm();
+  }
+
   return (
     <section className="register">
       <div className="register__container">
@@ -15,44 +32,68 @@ export const Register = () => {
           additionalText="Уже зарегистрированы?"
           linkText="Войти"
           linkUrl="/signin"
+          isValid={isValid}
+          onSubmit={handleRegisterFormSubmit}
+          commonMistakeText={commonMistakeText}
+          isSendingRequest={isSendingRequest}
         >
           <div className="user-auth-form__input-container">
-            <label
-              className="user-auth-form__label"
-              htmlFor="userName">
+            <label className="user-auth-form__label" htmlFor="name">
               Имя
+              <input
+                className="user-auth-form__input"
+                placeholder="Имя"
+                type="text"
+                name="name"
+                id="name"
+                autoComplete="off"
+                required
+                onChange={handleChange}
+                value={name || ''}
+                disabled={isSendingRequest ? true : false}
+              />
+              <span className="user-auth-form__error">
+                {errors.name}
+              </span>
             </label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Имя"
-              type="text"
-              name="userName"
-              id="userName"
-              autocomplete="off"
-              required
-            />
-            <label className="user-auth-form__label" htmlFor="userEmail">E-mail</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="E-mail"
-              type="text"
-              name="userEmail"
-              id="userEmail"
-              autocomplete="off"
-              required
-            />
-            <label className="user-auth-form__label" htmlFor="userPassword">Пароль</label>
-            <input
-              className="user-auth-form__input"
-              placeholder="Пароль"
-              type="password"
-              name="userPassword"
-              id="userPassword"
-              autocomplete="off"
-              required
-            />
+            <label className="user-auth-form__label" htmlFor="email">
+              E-mail
+              <input
+                className="user-auth-form__input"
+                placeholder="E-mail"
+                type="email"
+                name="email"
+                id="email"
+                autoComplete="off"
+                required
+                onChange={handleChange}
+                value={email || ''}
+                disabled={isSendingRequest ? true : false}
+              />
+              <span className="user-auth-form__error">
+                {errors.email}
+              </span>
+            </label>
+            <label className="user-auth-form__label" htmlFor="password">
+              Пароль
+              <input
+                className="user-auth-form__input"
+                placeholder="Пароль"
+                type="password"
+                name="password"
+                id="password"
+                autoComplete="off"
+                required
+                onChange={handleChange}
+                value={password || ''}
+                minLength="8"
+                disabled={isSendingRequest ? true : false}
+              />
+              <span className="user-auth-form__error">
+                {errors.password}
+              </span>
+            </label>
           </div>
-          <p className="user-auth-form__error">Что-то пошло не так...</p>
         </UserAuthForm>
       </div>
     </section>

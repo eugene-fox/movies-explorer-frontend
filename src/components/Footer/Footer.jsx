@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="footer">
       <div className="footer__container">
         <p className="footer__about-text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
-        <p className="footer__copyright">&copy; 2021</p>
+        <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
         <ul className="footer__menu">
           <li className="footer__menu-item">
             <a className="footer__menu-link" href="https://praktikum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
