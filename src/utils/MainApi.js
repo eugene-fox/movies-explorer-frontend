@@ -29,7 +29,6 @@ class MainApi {
       });
   }
 
-
   //  Достаём токен из локального хранилища
   getToken() {
     return localStorage.getItem('jwt');
@@ -114,7 +113,7 @@ class MainApi {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN
       })
-    }).then(this._getResponse)
+    }).then(this._checkResponse);
   }
 
   //  Удаление фильма из сохраненных

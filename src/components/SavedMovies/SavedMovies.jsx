@@ -12,6 +12,10 @@ export const SavedMovies = ({
   setIsShortMovies,
   filterShortMovies,
   movies,
+  savedMovies,
+  onLikeButtonClick,
+  moviesStatusMessage,
+  setMoviesStatusMessage
 }) => {
   return (
     <>
@@ -22,7 +26,10 @@ export const SavedMovies = ({
         setIsShortMovies={setIsShortMovies}
       />
       <MoviesCardList
-        movies={isShortMovies ? filterShortMovies(movies) : movies}
+        movies={filterShortMovies(movies)}
+        onLikeButtonClick={onLikeButtonClick}
+        moviesStatusMessage={moviesStatusMessage}
+        setMoviesStatusMessage={setMoviesStatusMessage}
       />
       <Footer />
     </>

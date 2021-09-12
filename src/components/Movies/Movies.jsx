@@ -1,22 +1,47 @@
 import './Movies.css';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Header } from '../Header/Header';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { Footer } from '../Footer/Footer';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
+import { MOBILE_WIDTH, TABLET_WIDTH } from '../../utils/constants';
+
 
 export const Movies = ({
   isLoggedIn,
-  preloaderVisible,
-  onSearch,
   isShortMovies,
   setIsShortMovies,
   filterShortMovies,
   movies,
+  savedMovies,
+  onLikeButtonClick,
+  preloaderVisible,
+  onSearch,
+  moviesStatusMessage,
+  setMoviesStatusMessage,
+  isSendingRequest,
 }) => {
+
+  //  Отображаемые фильмы
+  // const [displayedMovies, setDisplayedMovies] = useState([]);
+  //  Количество отображаемых фильмов
+  const [countOfDisplayMovie, setCountOfDisplayMovie] = useState({ initialMovies: 0, moreMovies: 0 });
+
+  //Ограничение отображение фильмов displayLimitedCountOfMoviesSetter
+  const countOfDisplayMovieSetter = () => {
+    const screenWidth = window.screen.width;
+    if (screenWidth <= MOBILE_WIDTH) {
+      setCountOfDisplayMovie({ startCards: 5, moreCards: 2 })
+    } else if (screenWidth <= TABLET_WIDTH) {
+      setCountOfDisplayMovie({ startCards: 8, moreCards: 2 })
+    } else {
+      setCountOfDisplayMovie({ startCards: 12, moreCards: 3 })
+    }
+  }
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
@@ -24,10 +49,18 @@ export const Movies = ({
         onSearch={onSearch}
         isShortMovies={isShortMovies}
         setIsShortMovies={setIsShortMovies}
+        isSendingRequest={isSendingRequest}
       />
       <MoviesCardList
         preloaderVisible={preloaderVisible}
-        movies={isShortMovies? filterShortMovies(movies) : movies}
+        movies={filterShortMovies(movies)}
+        savedMovies={savedMovies}
+        onLikeButtonClick={onLikeButtonClick}
+        countOfDisplayMovie={countOfDisplayMovie}
+        setCountOfDisplayMovie={setCountOfDisplayMovie}
+        countOfDisplayMovieSetter={countOfDisplayMovieSetter}
+        moviesStatusMessage={moviesStatusMessage}
+        setMoviesStatusMessage={setMoviesStatusMessage}
       />
       <Footer />
     </>

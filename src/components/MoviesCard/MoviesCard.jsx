@@ -1,20 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 
 import './MoviesCard.css';
 
-export const MoviesCard = ({ imageUrl, title, filmDuration, isSaved, trailerLink }) => {
+export const MoviesCard = ({
+  movie,
+  imageUrl,
+  title,
+  filmDuration,
+  trailerLink,
+  onLikeButtonClick,
+  savedMovies
+}) => {
 
   const isSavedMoviesPage = useRouteMatch({ path: '/saved-movies', exact: true });
 
+  // const isSaved = savedMovies.some(savedMovie => movie.movieId === savedMovie.movieId);
+
+  const [isSaved, setIsSaved] = useState(false);
   const [filmLikeStatus, setFilmLikeStatus] = useState(isSaved);
 
   const filmLikeButtonClickHandler = () => {
-    setFilmLikeStatus(!filmLikeStatus);
+    onLikeButtonClick(movie, isSaved);
+    setIsSaved(savedMovies.some(savedMovie => movie.id === savedMovie.id));
   }
 
+  useEffect(() => {
+    setIsSaved(savedMovies.some(savedMovie => movie.id === savedMovie.id));
+  }, [savedMovies, movie]);
+
   const filmLikeButtonClassName = (
-    `movies-card__save-film-button ${filmLikeStatus ? 'movies-card__save-film-button_active' : 'movies-card__save-film-button_disable'}`
+    `movies-card__save-film-button ${isSaved ? 'movies-card__save-film-button_active' : 'movies-card__save-film-button_disable'}`
   );
 
   return (
@@ -29,6 +45,7 @@ export const MoviesCard = ({ imageUrl, title, filmDuration, isSaved, trailerLink
           type="button"
           aria-label="Удалить фильм"
           className="movies-card__delete-button"
+          onClick={filmLikeButtonClickHandler}
         />) : (
           <button
             type="button"

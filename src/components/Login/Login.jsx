@@ -4,7 +4,11 @@ import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const Login = ({onLogin, commonMistakeText}) => {
+export const Login = ({
+  onLogin,
+  commonMistakeText,
+  isSendingRequest
+}) => {
 
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
@@ -13,7 +17,7 @@ export const Login = ({onLogin, commonMistakeText}) => {
   // Обработчик сабмита формы логина
   const handleLoginFormSubmit = (evt) => {
     evt.preventDefault();
-    onLogin({email, password});
+    onLogin({ email, password });
     resetForm();
   }
 
@@ -31,6 +35,7 @@ export const Login = ({onLogin, commonMistakeText}) => {
           isValid={isValid}
           onSubmit={handleLoginFormSubmit}
           commonMistakeText={commonMistakeText}
+          isSendingRequest={isSendingRequest}
         >
           <div className="user-auth-form__input-container">
             <label className="user-auth-form__label" htmlFor="email">
@@ -45,6 +50,7 @@ export const Login = ({onLogin, commonMistakeText}) => {
                 autoComplete="off"
                 onChange={handleChange}
                 value={email || ''}
+                disabled={isSendingRequest ? true : false}
               />
               <span className="user-auth-form__error">
                 {errors.email}
@@ -62,6 +68,7 @@ export const Login = ({onLogin, commonMistakeText}) => {
                 onChange={handleChange}
                 value={password || ''}
                 minLength="8"
+                disabled={isSendingRequest ? true : false}
               />
               <span className="user-auth-form__error">
                 {errors.password}

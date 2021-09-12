@@ -4,7 +4,11 @@ import { UserAuthForm } from '../UserAuthForm/UserAuthForm';
 
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const Register = ({ onRegistration, commonMistakeText }) => {
+export const Register = ({
+  onRegistration,
+  commonMistakeText,
+  isSendingRequest
+}) => {
 
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
@@ -13,7 +17,7 @@ export const Register = ({ onRegistration, commonMistakeText }) => {
   // Обработчик сабмита формы регистрации
   const handleRegisterFormSubmit = (evt) => {
     evt.preventDefault();
-    onRegistration({name, email, password});
+    onRegistration({ name, email, password });
     resetForm();
   }
 
@@ -31,6 +35,7 @@ export const Register = ({ onRegistration, commonMistakeText }) => {
           isValid={isValid}
           onSubmit={handleRegisterFormSubmit}
           commonMistakeText={commonMistakeText}
+          isSendingRequest={isSendingRequest}
         >
           <div className="user-auth-form__input-container">
             <label className="user-auth-form__label" htmlFor="name">
@@ -45,6 +50,7 @@ export const Register = ({ onRegistration, commonMistakeText }) => {
                 required
                 onChange={handleChange}
                 value={name || ''}
+                disabled={isSendingRequest ? true : false}
               />
               <span className="user-auth-form__error">
                 {errors.name}
@@ -62,6 +68,7 @@ export const Register = ({ onRegistration, commonMistakeText }) => {
                 required
                 onChange={handleChange}
                 value={email || ''}
+                disabled={isSendingRequest ? true : false}
               />
               <span className="user-auth-form__error">
                 {errors.email}
@@ -80,6 +87,7 @@ export const Register = ({ onRegistration, commonMistakeText }) => {
                 onChange={handleChange}
                 value={password || ''}
                 minLength="8"
+                disabled={isSendingRequest ? true : false}
               />
               <span className="user-auth-form__error">
                 {errors.password}

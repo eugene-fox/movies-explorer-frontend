@@ -3,7 +3,7 @@ import { ShortMoviesCheckbox } from '../ShortMoviesCheckbox/ShortMoviesCheckbox'
 
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-export const SearchForm = ({ onSearch, isShortMovies, setIsShortMovies }) => {
+export const SearchForm = ({ onSearch, isShortMovies, setIsShortMovies, isSendingRequest }) => {
 
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
@@ -28,8 +28,13 @@ export const SearchForm = ({ onSearch, isShortMovies, setIsShortMovies }) => {
               onChange={handleChange}
               value={searchQuery || ''}
               required
+              disabled={isSendingRequest ? true : false}
             />
-            <button className="search-form__search-button" type="submit" disabled={isValid ? false : true}>Поиск</button>
+            <button
+              className="search-form__search-button"
+              type="submit" disabled={isValid ? false : true}>
+              Поиск
+            </button>
           </div>
           <ShortMoviesCheckbox
             isShortMovies={isShortMovies}

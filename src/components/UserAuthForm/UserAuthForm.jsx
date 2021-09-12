@@ -12,6 +12,7 @@ export const UserAuthForm = ({
   isValid,
   onSubmit,
   commonMistakeText,
+  isSendingRequest
 }) => {
   return (
     <form className="user-auth-form"
@@ -28,7 +29,7 @@ export const UserAuthForm = ({
       <button
         className={`user-auth-form__button ${!isValid ? 'user-auth-form__button_disabled' : ''}`}
         type="submit"
-        disabled={!isValid ? true : false}
+        disabled={!isValid || isSendingRequest ? true : false}
       >
         {submitButtonText}
       </button>
