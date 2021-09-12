@@ -18,7 +18,6 @@ export const MoviesCard = ({
   // const isSaved = savedMovies.some(savedMovie => movie.movieId === savedMovie.movieId);
 
   const [isSaved, setIsSaved] = useState(false);
-  const [filmLikeStatus, setFilmLikeStatus] = useState(isSaved);
 
   const filmLikeButtonClickHandler = () => {
     onLikeButtonClick(movie, isSaved);

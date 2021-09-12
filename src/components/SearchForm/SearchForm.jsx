@@ -5,7 +5,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 export const SearchForm = ({ onSearch, isShortMovies, setIsShortMovies, isSendingRequest }) => {
 
-  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+  const { values, isValid, handleChange } = useFormWithValidation();
 
   const { searchQuery } = values;
 

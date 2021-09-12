@@ -1,6 +1,6 @@
 import './Movies.css';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Header } from '../Header/Header';
 import { SearchForm } from '../SearchForm/SearchForm';
@@ -8,7 +8,6 @@ import { Footer } from '../Footer/Footer';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 import { MOBILE_WIDTH, TABLET_WIDTH } from '../../utils/constants';
-
 
 export const Movies = ({
   isLoggedIn,
@@ -25,8 +24,6 @@ export const Movies = ({
   isSendingRequest,
 }) => {
 
-  //  Отображаемые фильмы
-  // const [displayedMovies, setDisplayedMovies] = useState([]);
   //  Количество отображаемых фильмов
   const [countOfDisplayMovie, setCountOfDisplayMovie] = useState({ initialMovies: 0, moreMovies: 0 });
 
@@ -41,6 +38,14 @@ export const Movies = ({
       setCountOfDisplayMovie({ startCards: 12, moreCards: 3 })
     }
   }
+
+  useEffect(() => {
+    window.addEventListener('resize', countOfDisplayMovieSetter)
+
+    return () => {
+      window.removeEventListener('resize', countOfDisplayMovieSetter)
+    }
+  }, [])
 
   return (
     <>

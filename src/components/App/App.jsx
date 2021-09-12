@@ -68,11 +68,12 @@ function App() {
     }
   }
 
-  //Проверка наличия токена в локальном хранилище при монтировании элемента
+  //  Проверка наличия токена в локальном хранилище при монтировании элемента
   useEffect(() => {
     checkToken();
   }, []);
 
+  //  Сброс стейта переключателя короткометражек
   useEffect(() => {
     setIsShortMovies(false);
   }, [pathname]);
@@ -202,6 +203,7 @@ function App() {
     setFoundSavedMovies(findMoviesByKeywords(savedMovies, searchQuery));
   }
 
+  //  Получаем сохраненные фильмы
   const getSavedMovies = () => {
     mainApi.getSavedMovies()
       .then((movies) => {
@@ -255,6 +257,7 @@ function App() {
       })
   }
 
+  //  Обработчик клика на лайк
   const onLikeButtonClick = (movie, isSaved) => {
     if (!isSaved) {
       handleMovieSave(movie);
@@ -265,9 +268,7 @@ function App() {
 
   return (
     <div className="app">
-
       <CurrentUserContext.Provider value={currentUser}>
-
         <Switch>
 
           <Route exact path="/">
@@ -337,9 +338,7 @@ function App() {
           </Route>
 
         </Switch>
-
       </CurrentUserContext.Provider>
-
     </div>
   );
 }

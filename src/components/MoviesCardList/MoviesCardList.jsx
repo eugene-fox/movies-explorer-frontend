@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { Preloader } from '../Preloader/Preloader';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MOVIES_API_URL } from '../../utils/constants';
@@ -24,9 +24,7 @@ export const MoviesCardList = ({
   const { pathname } = useLocation();
 
   useEffect(() => {
-
     setMoviesStatusMessage('');
-
     if (pathname !== '/saved-movies') {
       countOfDisplayMovieSetter();
     }
